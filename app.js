@@ -15,6 +15,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
 var profile = require('./routes/profile');
+var events = require('./routes/events');
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use('/', index);
 app.use('/', users);
 app.use('/', auth);
 app.use('/', profile);
+app.use('/', events);
 app.get("/", (req, res, next) => {
     res.send({
       session: req.session,
