@@ -78,5 +78,36 @@ router
     }, next)
 
   })
+  .get("/event/:event_id", loginRequired, (req, res, next) => {
+    res.render("event", {
+      event_id: req.params.event_id
+    })
+  })
+  .post("/request_to_join_event", loginRequired, (req, res, next) => {
+    const event_id = parseInt(req.body.event_id);
+
+    var owner_email = "";
+
+    db("events")
+      .select("owner_email")
+      .where("event_id", event_id)
+      .then((email) => {
+        owner_email = email[0].owner_email
+      })
+    
+    var newVolunteerRequest = {
+      event_id: event_id,
+      owner_email: owner_email,
+      participant_email: req.user.email,
+      status: false
+    };
+    // res.render(newEvent);
+    db("volunteers")
+      .insert(newVolunteerRequest)
+      .then((ids) => {
+        // res.send(ids)
+        res.redirect("/")
+    }, next)
+  })
 
 module.exports = router
