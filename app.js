@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
 var session = require("express-session")
 var passport = require("passport")
 var authRoutes = require("./routes/auth")
@@ -18,6 +19,7 @@ var profile = require('./routes/profile');
 var events = require('./routes/events');
 
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,6 +36,9 @@ app.use(session({ secret: "replace later", resave: false, saveUninitialized: fal
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(authRoutes)
+
+app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
+app.use('/custom', express.static('public/stylesheets'));
 
 app.use('/', index);
 app.use('/', users);
