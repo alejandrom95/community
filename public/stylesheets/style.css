@@ -1,8 +1,20 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+.community-nav {
+  margin-top: 15px;
+}
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: auto;
+}
+.community-nav .navbar-brand>img {
+  padding: 7px 15px;
 }
 
-a {
-  color: #00B7FF;
+.community-nav .navbar-default {
+  background-color: #FFF;
+  border: none;
 }
