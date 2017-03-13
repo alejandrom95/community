@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Event</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript">
+    	// var actionFlag = "{{flag}}" //possibly create flag when rendering page once again in order to signal to user that something has happened
+    </script>
+  </head>
+  <body>
+
+
+  <h1>Modify Event</h1>
+  <form action="/modify_event" method="post">
+  	<div>
+	    <input type="hidden" name="event_id" value="{{ event_id }}"/>
+	  </div>
+	  <div>
+	    <label>Event Name:</label>
+	    <input type="text" name="event_name" value="{{event_name}}"/>
+	  </div>
+	  <div>
+	    <label>Event Description:</label>
+	    <input type="text" name="event_description" value="{{description}}"/>
+	  </div>
+	  <div>
+	    <label>Event Location:</label>
+	    <input type="text" name="event_location" value="{{location}}"/>
+	  </div>
+	  <div>
+	    <label>Event Zipcode:</label>
+	    <input type="text" name="event_zipcode" value="{{zipcode}}"/>
+	  </div>
+	  <div>
+	    <label>Event Date Time</label>
+	    <input type="text" name="event_date_time" value="{{date_time}}"/>
+	  </div>
+	  <div>
+	    <input type="submit" value="Modify Event"/>
+	  </div>
+	</form>
+
+	{{#volunteers}} 
+	
+	<form action="/accept_volunteer" method="post">
+  		<h1>Accept Volunteer {{participant_email}}</h1>
+  		<div>
+		    <input type="hidden" name="participant_email" value="{{ participant_email }}"/>
+		  </div>
+	  <div>
+	    <input type="hidden" name="event_id" value="{{ event_id }}"/>
+	  </div>
+	  <div>
+	    <input type="submit" value="Accept Volunteer"/>
+	  </div>
+	</form>
+	{{/volunteers}}
+	{{#volunteers}} 
+	
+	<form action="/deny_volunteer" method="post">
+  		<h1>Deny Volunteer {{participant_email}}</h1>
+  		<div>
+		    <input type="hidden" name="participant_email" value="{{ participant_email }}"/>
+		  </div>
+	  <div>
+	    <input type="hidden" name="event_id" value="{{ event_id }}"/>
+	  </div>
+	  <div>
+	    <input type="submit" value="Deny Volunteer"/>
+	  </div>
+	</form>
+	{{/volunteers}}
+
+
+	<!-- {{#volunteers}} 
+
+		<li>{{event_id}}</li>
+		<li>{{participant_email}}</li>
+		<li>{{owner_email}}</li>
+		<li>{{status}}</li>
+	{{/volunteers}} -->
+
+	<li>{{event_id}}</li>
+	<li>{{event_name}}</li>
+	<li>{{owner_email}}</li>
+	<li>{{description}}</li>
+	<li>{{status}}</li>
+	<li>{{location}}</li>
+	<li>{{zipcode}}</li>
+	<li>{{date_time}}</li>
+  </body>
+</html>
