@@ -6,6 +6,7 @@
   </head>
   <body>
   	<form action="/request_to_join_event" method="post">
+  		<h1>Request to join event form</h1>
 	  <div>
 	    <input type="hidden" name="event_id" value="{{ event_id }}"/>
 	  </div>
@@ -13,5 +14,15 @@
 	    <input type="submit" value="Join Event"/>
 	  </div>
 	</form>
+
+
+	<li>{{event_id}}</li>
+	<li>{{event_name}}</li>
+	<li>{{owner_email}}</li>
+	<li>{{description}}</li>
+	<li>{{status}}</li>
+	<li>{{location}}</li>
+	<li>{{zipcode}}</li>
+	<li>{{date_time}}</li>
   </body>
 </html>
