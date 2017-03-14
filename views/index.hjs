@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Community</title>
+  </head>
+  <body>
+    <p>Zipcode is: {{ zipcode }}</p>
+    {{#events}} 
+
+	<li>{{event_id}}</li>
+	<li>{{event_name}}</li>
+	<li>{{owner_email}}</li>
+	<li>{{description}}</li>
+	<li>{{status}}</li>
+	{{/events}}
+  </body>
+</html>

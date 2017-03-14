@@ -1,0 +1,8 @@
+{{#users}} 
+
+<li>{{email}}</li>
+<li>{{first_name}}</li>
+<li>{{last_name}}</li>
+<li>{{zipcode}}</li>
+<li>{{rating}}</li>
+{{/users}}
