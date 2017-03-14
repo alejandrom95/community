@@ -1,0 +1,25 @@
+<form action="/create_event" method="post">
+  <div>
+    <label>Event Name:</label>
+    <input type="text" name="event_name" value="test event"/>
+  </div>
+  <div>
+    <label>Event Description:</label>
+    <input type="text" name="event_description" value="test description"/>
+  </div>
+  <div>
+    <label>Event Location:</label>
+    <input type="text" name="event_location" value="test location"/>
+  </div>
+  <div>
+    <label>Event Zipcode:</label>
+    <input type="text" name="event_zipcode" value="12345"/>
+  </div>
+  <div>
+    <label>Event Date Time</label>
+    <input type="text" name="event_date_time" value="1000-01-01 00:00:00"/>
+  </div>
+  <div>
+    <input type="submit" value="Create Event"/>
+  </div>
+</form>
