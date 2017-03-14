@@ -5,8 +5,7 @@ const db = knex({
   connection: {
     host: "127.0.0.1",
     user: "root",
-    database: "community",
-    port: "3307"
+    database: "community"
   }
 });
 
