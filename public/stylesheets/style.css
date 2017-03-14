@@ -18,3 +18,81 @@
   background-color: #FFF;
   border: none;
 }
+
+.jumbotron {
+  background-color: transparent;
+}
+
+#family {
+  font-size: 1.6em;
+}
+
+.login-image {
+  background-image: url("/images/sunset.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 350px;
+
+}
+
+.login-banner {
+  position: relative;
+  top: -360px;
+}
+
+.login-about {
+  top: 360px;
+}
+
+.login-text {
+  padding-top: 50px;
+  color: white;
+}
+
+.panel-primary {
+  border-color: transparent;
+}
+
+.panel {
+  background-color: #f8f8f9;
+  border-top: 8px solid #313a40;
+}
+
+.signup-form form {
+  margin: 0px 10px;
+}
+
+.signup-form h2 {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.signup-form .container {
+  max-width: 360px;
+}
+
+.signup-form .divider {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.signup-form .divider hr {
+  margin: 7px 0px;
+  width: 35%;
+}
+
+.btn-info {
+  background-color: #376f86;
+  border-color: #376f86;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #4f869c;
+    border-color: #269abc;
+}
+
+.signup-form .left { float: left; }
+
+.signup-form .right { float: right; }
