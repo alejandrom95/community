@@ -19,117 +19,123 @@
   </head>
 
   <body>
-    <div class="container community-nav">
+    <div class="container-fluid community-nav">
       <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="/images/community-logo.png" alt="Community Logo">
-            </a>
-          </div>
-          <div id="navbar2" class="navbar-collapse collapse">
-            <!-- <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
-            </ul> -->
-          <form class="form-inline navbar-form navbar-right">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="/images/community-logo.png" alt="Community Logo">
+          </a>
+        </div>
+        <div id="navbar2" class="navbar-collapse collapse">
+        <!-- LOG-IN FORM -->
+          <form action="/login" method="post" class="form-inline navbar-form navbar-right">
             <div class="form-group">
               <label class="sr-only" for="exampleInputEmail3">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+              <input type="email" class="form-control" id="exampleInputEmail3" name="username" placeholder="Email">
             </div>
             <div class="form-group">
               <label class="sr-only" for="exampleInputPassword3">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+              <input type="password" class="form-control" id="exampleInputPassword3" name="password" placeholder="Password">
             </div>
+            <button type="submit" class="btn btn-info">Sign in</button>
             <div class="checkbox">
               <label>
                 <input type="checkbox"> Remember me
               </label>
             </div>
-            <button type="submit" class="btn btn-default">Sign in</button>
           </form>
-          </div>
-          <!--/.nav-collapse -->
-        </div>
-        <!--/.container-fluid -->
+        </div> <!--/.nav-collapse -->
       </nav>
+    </div> <!--/.container-fluid -->
+
+    <div class="login-image">
+      <div class="container-fluid">
+        <div class="row login-text text-center">
+          <div class="col-xs-7">
+            <h1>Where neighbors</h1>
+            <h1>become  &nbsp;<span id="family"><i>Family</i></span>.</h1>
+          </div>
+          <div class="col-xs-4">
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="container">
-      <!-- LOG-IN FORM -->
-      <div class="login-form">
-        <form action="/login" method="post">
-          <div>
-            <label>Email:</label>
-            <input type="text" name="username"/>
+    <div class="login-banner">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-7 login-about">
+            <div class="row text-center">
+              <div class="col-md-4">
+                <h3><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Family</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Sed ipsum lectus, auctor pulvinar consectetur vitae, finibus vitae risus.
+                  Cras sit amet molestie arcu. Aliquam id tempor odio, in finibus urna.</p>
+              </div>
+              <div class="col-md-4">
+                <h3><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Friends</h3>
+                <p>Pellentesque feugiat fringilla placerat. Nullam a mollis quam.
+                  Aenean et urna non lorem varius ultricies ac eu dolor.
+                  Cras ac sapien euismod lectus blandit aliquet vitae at tortor. </p>
+              </div>
+              <div class="col-md-4">
+                <h3><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Neighbors</h3>
+                <p>Donec eu sapien sapien. Aenean tempus egestas risus,
+                  sit amet auctor eros faucibus dictum. Pellentesque porttitor a erat semper auctor.
+                  Aliquam erat volutpat. Sed lobortis gravida justo, nec mollis nibh consectetur et.</p>
+              </div>
+            </div>
           </div>
-          <div>
-            <label>Password:</label>
-            <input type="password" name="password"/>
+          <div class="col-xs-5">
+            <div class="signup-form">
+              <div class="container">
+                <div class="row">
+                  <div class="panel panel-primary">
+                    <div class="panel-body">
+                      <form action="/signup" method="post" role="form">
+                        <div class="form-group">
+                          <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Create Account</h2>
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label" for="firstName">First Name</label>
+                          <input id="firstName" type="text" name="first_name" maxlength="50" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label" for="lastName">Last Name</label>
+                          <input id="lastName" type="text" name="last_name" maxlength="50" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label" for="signupEmail">Email</label>
+                          <input id="signupEmail" type="email" name="username" maxlength="50" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label" for="signupPassword">Password</label>
+                          <input id="signupPassword" type="password" name="password" maxlength="25" class="form-control" placeholder="" length="40">
+                          <input id="signupPassword" type="password" name="password2" maxlength="25" class="form-control" placeholder="Confirm password" length="40">
+                        </div>
+                        <div class="form-group">
+                          <label class="control-label" for="zipCode">Zipcode</label>
+                          <input id="zipCode" type="text" name="zipcode" maxlength="5" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <button id="signupSubmit" type="submit" class="btn btn-info btn-block">Create your account</button>
+                        </div>
+                        <hr>
+                        <p>Already have an account? <a href="#">Sign in</a></p>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <input type="submit" value="Log In"/>
-          </div>
-        </form>
+        </div>
       </div>
-      <!-- SIGN-UP FORM -->
-      <div class="signup-form">
-        <form action="/signup" method="post">
-          <div>
-            <label>First Name:</label>
-            <input type="text" name="first_name"/>
-          </div>
-          <div>
-            <label>Last Name:</label>
-            <input type="text" name="last_name"/>
-          </div>
-          <div>
-            <label>Email:</label>
-            <input type="text" name="username"/>
-          </div>
-          <div>
-            <label>Password:</label>
-            <input type="password" name="password"/>
-          </div>
-          <div>
-            <label>Password (repeat):</label>
-            <input type="password" name="password2"/>
-          </div>
-          <div>
-            <label>Zipcode:</label>
-            <input type="text" name="zipcode"/>
-          </div>
-          <div>
-            <input type="submit" value="Log In"/>
-          </div>
-        </form>
-      </div>
-
-      <!-- <div class="jumbotron">
-        <h1>Jumbotron heading</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
-      </div> -->
-
-
-
+    </div>
       <footer class="footer">
         <p>&copy; 2016 Company, Inc.</p>
       </footer>

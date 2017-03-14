@@ -1,17 +1,170 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Community</title>
-  </head>
-  <body>
-    <p>Zipcode is: {{ zipcode }}</p>
-    {{#events}} 
+<!doctype html>
+<html lang="en-US">
+<head>
 
-	<li>{{event_id}}</li>
-	<li>{{event_name}}</li>
-	<li>{{owner_email}}</li>
-	<li>{{description}}</li>
-	<li>{{status}}</li>
-	{{/events}}
-  </body>
-</html>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Community - Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" media="screen" charset="utf-8" rel="stylesheet">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- the above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	
+	<!--Bootstrap core CSS-->
+	<!--<link href="/bootstrap/css/bootstrap.min.css" media="screen" charset="utf-8" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" media="all" href="css/global.css"> -->
+	<link rel="stylesheet" type="text/css" media="all" href="/custom/tools.css">
+	<link rel="stylesheet" type="text/css" media="all" href="/custom/style.css">
+</head>
+
+<body>
+<div class="container-fluid community-nav">
+      <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="/images/community-logo.png" alt="Community Logo">
+          </a>
+
+        </div>
+        <div id="navbar2" class="navbar-collapse collapse">
+        <div>
+         <ul class="nav navbar-nav">
+			  <li class="active"><a href="#">Home</a></li>
+			  <li><a href="#">Page 1</a></li>
+			  <li><a href="#">Page 2</a></li>
+			</ul>
+		</div>
+        <ul class="nav navbar-nav navbar-right">
+			  <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+			</ul>
+          
+        </div> <!--/.nav-collapse -->
+      </nav>
+    </div> <!--/.container-fluid -->
+
+<!-- -->
+	<!--<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"><img src="images/community-logo.png" alt="Cinque Terre"> </img></a>
+			</div>
+			<ul class="nav navbar-nav">
+			  <li class="active"><a href="#">Home</a></li>
+			  <li><a href="#">Page 1</a></li>
+			  <li><a href="#">Page 2</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+			  <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+			</ul>
+		</div>
+	</nav> -->
+	<div class = "container text-center">
+		<header id="heading">		
+			<img src="images/temp.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236"> 
+			<h2>User Name</h2>
+		</header>
+	</div>
+	<div class="container-fluid">
+		<div class="well"><h2>Events</h2></div>
+		<div class="row">	
+		    <!-- might have to change this to col-*-* -->
+			<div class="col-sm-4" sytle="background-color:lavender;">
+				<h4>Upcoming Events</h4>        
+				  <table class="table table-bordered">
+					<thead>
+					  <tr>
+						<th>Event</th>
+						<th>Date</th>
+						<th>Location</th>					
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td>St. Mary's Soup Kitchen</td>
+						<td>4/3/17</td>
+						<td>102 e 63rd St, Long Beach, CA 90805</td>
+					  </tr>
+					  <tr>
+						<td>Lee elementary Bake Sale</td>
+						<td>4/21/17</td>
+						<td>1620 Temple Ave, Long Beach, CA 90804</td>
+					  </tr>
+					  <tr>
+						<td>St Jude Toy Drive</td>
+						<td>5/12/17</td>
+						<td>1526 Del Amo Blvd, Long Beach, CA 90805</td>
+					  </tr>
+					</tbody>
+				  </table>
+				<button type="button" class="btn btn-default">More Events</button>
+			</div><!--end of span 4 -->
+			<div class ="col-sm-8" style = "background-color:white;">
+				<h4>Local Events {{zipcode}}</h4> 
+
+				<table class="table table-hover">
+					<thead>
+					  <tr>
+						<th>Event</th>
+						<th>Date</th>
+						<th>Location</th>
+						<th>Zipcode</th>
+						<th>Request to Join</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  {{#events}} 
+					  <tr>
+						<td>{{event_name}}</td>
+						<td>{{date_time}}</td>
+						<td>{{location}}</td>
+						<td>{{zipcode}}</td>
+						<td><button type="button" class="btn btn-default">+</button></td>
+					  </tr>
+					  {{/events}}
+
+					</tbody>
+				  </table><!-- end of table -->
+				  {{#events}} 
+
+					<li>{{event_id}}</li>
+					<li>{{event_name}}</li>
+					<li>{{owner_email}}</li>
+					<li>{{description}}</li>
+					<li>{{status}}</li>
+					{{/events}}
+				<ul class="pager">
+					<li><a href="#">Previous</a></li>
+					<li><a href="#">Next</a></li>
+				</ul>
+			</div><!--end of span 4-->
+		</div><!-- end or row --> 
+	</div><!--end of container div-->
+	
+	<div id="footer">
+		<div class="container">
+        <p>community</p>
+        <p>Building Stronger Relationships With Our Neighbors.</p>
+        
+      </div>
+	</div><!-- end footer -->
+	<script src="/jquery/jquery.min.js" charset="utf-8"></script>
+    <script src="/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    </script>
+</body><!-- end body -->
+</html><!-- end html -->
