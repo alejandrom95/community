@@ -1,28 +1,101 @@
 <!DOCTYPE html>
 <html>
   <head>
+
+  	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+	<!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" media="screen" charset="utf-8" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/custom/style.css" media="screen" charset="utf-8" rel="stylesheet">
+
+
     <title>Event</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+
+<div class="container-fluid community-nav">
+      <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="/images/community-logo.png" alt="Community Logo">
+          </a>
+
+        </div>
+        <div id="navbar2" class="navbar-collapse collapse">
+        <div>
+         <ul class="nav navbar-nav">
+			  <li class="active"><a href="#">Home</a></li>
+			  <li><a href="#">Page 1</a></li>
+			  <li><a href="#">Page 2</a></li>
+			</ul>
+		</div>
+        <ul class="nav navbar-nav navbar-right">
+			  <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+			</ul>
+          
+        </div> <!--/.nav-collapse -->
+      </nav>
+    </div> <!--/.container-fluid -->
+
+
   	<form action="/request_to_join_event" method="post">
-  		<h1>Request to join event form</h1>
+
+  		<h1 id="requestjoin">Request to Join</h1>
 	  <div>
 	    <input type="hidden" name="event_id" value="{{ event_id }}"/>
 	  </div>
 	  <div>
-	    <input type="submit" value="Join Event"/>
+	  	<!--Not sure if this button works  -->
+	  	<button type="submit" class="btn btn-join">Join Event</button>
+	    <!-- <input type="submit" value="Join Event"/> -->
 	  </div>
 	</form>
 
+<div class="container-fluid event-page">
+	<div class="row">
+    	<div class="col-md-7">
+    		<div class="eTitle">
+				<h1>{{event_name}}</h1>
+				<h2>Posted By: {{owner_email}}</h2>
+				<p><br> {{description}} <br> <br></p>
+			</div> <!--/ eTitle -->
+			<div class="where">
+				<h1>Where & When</h1>
+				<p>
+					{{location}}
+					<br>On {{date_time}}
+				</p>
+			</div>  <!--/ where -->
+			</div>  <!--/ col-md-7 -->
+		
+			<div class="col-md-5"><img src="/images/beach-clean.png" alt="Beach" style="width:480px;height:360px;"> </div>
+    </div> <!--/ row -->
+</div> <!--/ container -->
 
-	<li>{{event_id}}</li>
-	<li>{{event_name}}</li>
-	<li>{{owner_email}}</li>
-	<li>{{description}}</li>
-	<li>{{status}}</li>
-	<li>{{location}}</li>
-	<li>{{zipcode}}</li>
-	<li>{{date_time}}</li>
+
+<div id="footer">
+		<div class="container">
+        <p>community</p>
+        <p>Building Stronger Relationships With Our Neighbors.</p>
+        
+      </div>
+	</div><!-- end footer -->
+
+
   </body>
 </html>
