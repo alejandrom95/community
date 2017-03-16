@@ -155,12 +155,20 @@ router
           status: false
         };
         // res.render(newEvent);
-        db("volunteers")
-          .insert(newVolunteerRequest)
-          .then((ids) => {
-            // res.send(ids)
-            res.redirect("/")
-        }, next)
+
+        db.raw('INSERT INTO volunteers (event_id,owner_email,participant_email,status) values (?, ?, ?, ?) ON DUPLICATE KEY UPDATE event_id=event_id', 
+          [event_id, owner_email, req.user.email, false])
+        .then((ids) => {
+          res.redirect("/")
+        });
+        
+        // res.redirect("/")
+        // db("volunteers")
+        //   .insert(newVolunteerRequest)
+        //   .then((ids) => {
+        //     // res.send(ids)
+        //     res.redirect("/")
+        //   }, next)
       })
   })
   .post("/accept_volunteer", loginRequired, (req, res, next) => {

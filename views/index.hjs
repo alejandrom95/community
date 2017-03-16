@@ -38,14 +38,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><img src="/images/community-logo.png" alt="Community Logo">
+          <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo">
           </a>
 
         </div>
         <div id="navbar2" class="navbar-collapse collapse">
         <div>
          <ul class="nav navbar-nav">
-			  <li class="active"><a href="#">Home</a></li>
+			  <li class="active"><a href="/">Home</a></li>
 			  <li><a href="#">Page 1</a></li>
 			  <li><a href="#">Page 2</a></li>
 			</ul>
@@ -85,7 +85,7 @@
 		<div class="row">	
 		    <!-- might have to change this to col-*-* -->
 			<div class="col-sm-4" sytle="background-color:lavender;">
-				<h4>Upcoming Events</h4>        
+				<h4>Your Events</h4>        
 				  <table class="table table-bordered">
 					<thead>
 					  <tr>
@@ -95,24 +95,35 @@
 					  </tr>
 					</thead>
 					<tbody>
+						{{#owner_events}}
 					  <tr>
-						<td>St. Mary's Soup Kitchen</td>
-						<td>4/3/17</td>
-						<td>102 e 63rd St, Long Beach, CA 90805</td>
+						<td><a href="/o_event/{{event_id}}">{{event_name}}</a></td>
+						<td>{{date_time}}</td>
+						<td>{{location}}</td>
 					  </tr>
-					  <tr>
-						<td>Lee elementary Bake Sale</td>
-						<td>4/21/17</td>
-						<td>1620 Temple Ave, Long Beach, CA 90804</td>
-					  </tr>
-					  <tr>
-						<td>St Jude Toy Drive</td>
-						<td>5/12/17</td>
-						<td>1526 Del Amo Blvd, Long Beach, CA 90805</td>
-					  </tr>
+					  	{{/owner_events}}
 					</tbody>
 				  </table>
-				<button type="button" class="btn btn-default">More Events</button>
+				  <h4>Volunteering Events</h4>  
+				  <table class="table table-bordered">
+					<thead>
+					  <tr>
+						<th>Event</th>
+						<th>Date</th>
+						<th>Location</th>					
+					  </tr>
+					</thead>
+					<tbody>
+						{{#volunteer_events}}
+					  <tr>
+						<td><a href="/event/{{event_id}}">{{event_name}}</a></td>
+						<td>{{date_time}}</td>
+						<td>{{location}}</td>
+					  </tr>
+					  	{{/volunteer_events}}
+					</tbody>
+				  </table>
+				<!-- <button type="button" class="btn btn-default">More Events</button> -->
 			</div><!--end of span 4 -->
 			<div class ="col-sm-8" style = "background-color:white;">
 				<h4>Local Events {{zipcode}}</h4> 
@@ -123,35 +134,30 @@
 						<th>Event</th>
 						<th>Date</th>
 						<th>Location</th>
-						<th>Zipcode</th>
+						<!-- <th>Zipcode</th> -->
 						<th>Request to Join</th>
 					  </tr>
 					</thead>
 					<tbody>
 					  {{#events}} 
 					  <tr>
-						<td>{{event_name}}</td>
+						<td><a href="/event/{{event_id}}">{{event_name}}</a></td>
 						<td>{{date_time}}</td>
 						<td>{{location}}</td>
-						<td>{{zipcode}}</td>
-						<td><button type="button" class="btn btn-default">+</button></td>
+						<!-- <td>{{zipcode}}</td> -->
+						<form action="/request_to_join_event" method="post" id="join_event_form_{{event_id}}">
+						<input type="hidden" name="event_id" value="{{ event_id }}"/>
+						</form>
+						<td><button type="submit" class="btn btn-default" form="join_event_form_{{event_id}}">Volunteer</button></td>
 					  </tr>
 					  {{/events}}
 
 					</tbody>
 				  </table><!-- end of table -->
-				  {{#events}} 
-
-					<li>{{event_id}}</li>
-					<li>{{event_name}}</li>
-					<li>{{owner_email}}</li>
-					<li>{{description}}</li>
-					<li>{{status}}</li>
-					{{/events}}
-				<ul class="pager">
+				<!-- <ul class="pager">
 					<li><a href="#">Previous</a></li>
 					<li><a href="#">Next</a></li>
-				</ul>
+				</ul> -->
 			</div><!--end of span 4-->
 		</div><!-- end or row --> 
 	</div><!--end of container div-->

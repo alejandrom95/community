@@ -32,14 +32,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><img src="/images/community-logo.png" alt="Community Logo">
+          <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo">
           </a>
 
         </div>
         <div id="navbar2" class="navbar-collapse collapse">
         <div>
          <ul class="nav navbar-nav">
-			  <li class="active"><a href="#">Home</a></li>
+			  <li class="active"><a href="/">Home</a></li>
 			  <li><a href="#">Page 1</a></li>
 			  <li><a href="#">Page 2</a></li>
 			</ul>
@@ -53,18 +53,7 @@
     </div> <!--/.container-fluid -->
 
 
-  	<form action="/request_to_join_event" method="post">
-
-  		<h1 id="requestjoin">Request to Join</h1>
-	  <div>
-	    <input type="hidden" name="event_id" value="{{ event_id }}"/>
-	  </div>
-	  <div>
-	  	<!--Not sure if this button works  -->
-	  	<button type="submit" class="btn btn-join">Join Event</button>
-	    <!-- <input type="submit" value="Join Event"/> -->
-	  </div>
-	</form>
+  	
 
 <div class="container-fluid event-page">
 	<div class="row">
@@ -72,12 +61,24 @@
     		<div class="eTitle">
 				<h1>{{event_name}}</h1>
 				<h2>Posted By: {{owner_email}}</h2>
+				<!-- <br> -->
+				<form action="/request_to_join_event" method="post">
+				  <div>
+				    <input type="hidden" name="event_id" value="{{ event_id }}"/>
+				  </div>
+				  <div>
+				  	<!--Not sure if this button works  -->
+				  	<button type="submit" class="btn btn-join">Volunteer</button>
+				    <!-- <input type="submit" value="Join Event"/> -->
+				  </div>
+				</form>
+				<!-- <br> -->
 				<p><br> {{description}} <br> <br></p>
 			</div> <!--/ eTitle -->
 			<div class="where">
 				<h1>Where & When</h1>
 				<p>
-					{{location}}
+					{{location}} {{zipcode}}
 					<br>On {{date_time}}
 				</p>
 			</div>  <!--/ where -->
