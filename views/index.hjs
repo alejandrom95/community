@@ -17,10 +17,7 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!-- the above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	
+
 	<!--Bootstrap core CSS-->
 	<!--<link href="/bootstrap/css/bootstrap.min.css" media="screen" charset="utf-8" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" media="all" href="css/global.css"> -->
@@ -51,9 +48,10 @@
 			</ul>
 		</div>
         <ul class="nav navbar-nav navbar-right">
+          <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
 			  <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 			</ul>
-          
+
         </div> <!--/.nav-collapse -->
       </nav>
     </div> <!--/.container-fluid -->
@@ -75,23 +73,23 @@
 		</div>
 	</nav> -->
 	<div class = "container text-center">
-		<header id="heading">		
-			<img src="images/temp.jpg" class="img-circle" alt="Cinque Terre" width="304" height="236"> 
+		<header id="heading">
+			<img src="images/default.jpg" class="img-circle" alt="Default profile" width="304" height="236">
 			<h2>User Name</h2>
 		</header>
 	</div>
 	<div class="container-fluid">
 		<div class="well"><h2>Events</h2></div>
-		<div class="row">	
+		<div class="row">
 		    <!-- might have to change this to col-*-* -->
 			<div class="col-sm-4" sytle="background-color:lavender;">
-				<h4>Your Events</h4>        
+				<h4>Your Events</h4>
 				  <table class="table table-bordered">
 					<thead>
 					  <tr>
 						<th>Event</th>
 						<th>Date</th>
-						<th>Location</th>					
+						<th>Location</th>
 					  </tr>
 					</thead>
 					<tbody>
@@ -104,13 +102,13 @@
 					  	{{/owner_events}}
 					</tbody>
 				  </table>
-				  <h4>Volunteering Events</h4>  
+				  <h4>Volunteering Events</h4>
 				  <table class="table table-bordered">
 					<thead>
 					  <tr>
 						<th>Event</th>
 						<th>Date</th>
-						<th>Location</th>					
+						<th>Location</th>
 					  </tr>
 					</thead>
 					<tbody>
@@ -126,7 +124,7 @@
 				<!-- <button type="button" class="btn btn-default">More Events</button> -->
 			</div><!--end of span 4 -->
 			<div class ="col-sm-8" style = "background-color:white;">
-				<h4>Local Events {{zipcode}}</h4> 
+				<h4>Local Events {{zipcode}}</h4>
 
 				<table class="table table-hover">
 					<thead>
@@ -139,7 +137,7 @@
 					  </tr>
 					</thead>
 					<tbody>
-					  {{#events}} 
+					  {{#events}}
 					  <tr>
 						<td><a href="/event/{{event_id}}">{{event_name}}</a></td>
 						<td>{{date_time}}</td>
@@ -159,14 +157,14 @@
 					<li><a href="#">Next</a></li>
 				</ul> -->
 			</div><!--end of span 4-->
-		</div><!-- end or row --> 
+		</div><!-- end or row -->
 	</div><!--end of container div-->
-	
+
 	<div id="footer">
 		<div class="container">
         <p>community</p>
         <p>Building Stronger Relationships With Our Neighbors.</p>
-        
+
       </div>
 	</div><!-- end footer -->
 	<script src="/jquery/jquery.min.js" charset="utf-8"></script>
