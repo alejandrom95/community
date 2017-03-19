@@ -1,92 +1,214 @@
 <!DOCTYPE html>
 <html>
   <head>
+
+  	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+	<!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" media="screen" charset="utf-8" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/custom/style.css" media="screen" charset="utf-8" rel="stylesheet">
+
+
     <title>Event</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script type="text/javascript">
-    	// var actionFlag = "{{flag}}" //possibly create flag when rendering page once again in order to signal to user that something has happened
-    </script>
   </head>
   <body>
+    <div class="container-fluid community-nav">
+      <nav class="navbar navbar-default navbar-custom">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo">
+          </a>
+        </div>
+        <div id="navbar2" class="navbar-collapse collapse">
+        <div>
+         <ul class="nav navbar-nav">
+			  <li class="active"><a href="/">Home</a></li>
+			  <li><a href="#">Page 1</a></li>
+        <li><a href="#">Page 2</a></li>
+			</ul>
+		</div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
+          <li><a class="logout-button" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+			</ul>
+
+        </div> <!--/.nav-collapse -->
+      </nav>
+    </div> <!--/.container-fluid -->
 
 
-  <h1>Modify Event</h1>
-  <form action="/modify_event" method="post">
-  	<div>
-	    <input type="hidden" name="event_id" value="{{ event_id }}"/>
-	  </div>
-	  <div>
-	    <label>Event Name:</label>
-	    <input type="text" name="event_name" value="{{event_name}}"/>
-	  </div>
-	  <div>
-	    <label>Event Description:</label>
-	    <input type="text" name="event_description" value="{{description}}"/>
-	  </div>
-	  <div>
-	    <label>Event Location:</label>
-	    <input type="text" name="event_location" value="{{location}}"/>
-	  </div>
-	  <div>
-	    <label>Event Zipcode:</label>
-	    <input type="text" name="event_zipcode" value="{{zipcode}}"/>
-	  </div>
-	  <div>
-	    <label>Event Date Time</label>
-	    <input type="text" name="event_date_time" value="{{date_time}}"/>
-	  </div>
-	  <div>
-	    <input type="submit" value="Modify Event"/>
-	  </div>
-	</form>
+<div class="container">
 
-	{{#volunteers}} 
-	
-	<form action="/accept_volunteer" method="post">
-  		<h1>Accept Volunteer {{participant_email}}</h1>
-  		<div>
-		    <input type="hidden" name="participant_email" value="{{ participant_email }}"/>
-		  </div>
-	  <div>
-	    <input type="hidden" name="event_id" value="{{ event_id }}"/>
-	  </div>
-	  <div>
-	    <input type="submit" value="Accept Volunteer"/>
-	  </div>
-	</form>
-	{{/volunteers}}
-	{{#volunteers}} 
-	
-	<form action="/deny_volunteer" method="post">
-  		<h1>Deny Volunteer {{participant_email}}</h1>
-  		<div>
-		    <input type="hidden" name="participant_email" value="{{ participant_email }}"/>
-		  </div>
-	  <div>
-	    <input type="hidden" name="event_id" value="{{ event_id }}"/>
-	  </div>
-	  <div>
-	    <input type="submit" value="Deny Volunteer"/>
-	  </div>
-	</form>
-	{{/volunteers}}
+<div class="container-fluid event-page">
+	<div class="row">
+    	<div class="col-md-7">
+    		<div class="eTitle">
+				<h1>{{event_name}}</h1>
+				<h2>Posted By: {{owner_email}}</h2>
+				<h3>Status: {{status}}</h3>
+				<div>
+					<form action="/open_event" method="post" style="float: left;">
+					  <div>
+					    <input type="hidden" name="event_id" value="{{event_id}}"/>
+					  </div>
+					  <div>
+					    <input type="hidden" name="status" value="1"/>
+					  </div>
+					  <div>
+					    <button type="submit" class="btn btn-join" style="margin: 2pt;">Open Event</button>
+					  </div>
+					</form>
+					<form action="/close_event" method="post" style="float: left;">
+					  <div>
+					    <input type="hidden" name="event_id" value="{{event_id}}"/>
+					  </div>
+					  <div>
+					    <input type="hidden" name="status" value="2"/>
+					  </div>
+					  <div>
+					    <button type="submit" class="btn btn-join"  style="margin: 2pt;">Close Event</button>
+					  </div>
+					</form>
+					<form action="/cancel_event" method="post">
+					  <div>
+					    <input type="hidden" name="event_id" value="{{event_id}}"/>
+					  </div>
+					  <div>
+					    <input type="hidden" name="status" value="3"/>
+					  </div>
+					  <div>
+					    <button type="submit" class="btn btn-join" style="margin: 2pt;">Cancel Event</button>
+					  </div>
+					</form>
+				</div>
+				
+				<!-- <br> -->
+				<p><br> {{description}} <br> <br></p>
+			</div> <!--/ eTitle -->
+			<div class="where">
+				<h1>Where & When</h1>
+				<p>
+					{{location}} {{zipcode}}
+					<br>On {{date_time}}
+				</p>
+			</div>  <!--/ where -->
+			</div>  <!--/ col-md-7 -->
+		
+			<div class="col-md-5"><img class="img-responsive center-block" src="/images/globe.png" alt="Globe"></div>
+    </div> <!--/ row -->
+</div> <!--/ container -->
+</div>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-8">
+              <form action="/modify_event" method="post">
+	    		<input type="hidden" name="event_id" value="{{ event_id }}"/>
+                <div class="form-group">
+                  <label for="city">Modify Event</label>
+                  <input type="text" name="event_name" class="form-control" placeholder="Event Title" value="{{event_name}}" required />
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" name="event_description" placeholder="Event Description" rows="5" required>{{description}}</textarea>
+                </div>
+                <div class="form-group">
+                  <label for="city">Event Location</label>
+                  <input type="text" name="event_location" class="form-control" placeholder="Full Address" id="city" value="{{location}}" required/>
+                  <input type="text" name="event_zipcode" class="form-control" placeholder="Zipcode" id="zipcode" value="{{zipcode}}" required/>
+                </div>
+                <div class="form-group">
+                  <label for="date_time">Event Date</label>
+                  <input type="text" name="event_date_time" class="form-control" placeholder="Date, Time" id="date_time" value="{{date_time}}" required/>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-primary">Modify Event</button>
+                </div>
+            </form>
+            </div>
+            <div class="col-md-4">
+              upload image....
+              <img class="img-responsive center-block" src="/images/globe.png" alt="Globe">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
 
 
-	<!-- {{#volunteers}} 
+</div>
+<div class="container">
+	<div class="row">
+	    <!-- might have to change this to col-*-* -->
 
-		<li>{{event_id}}</li>
-		<li>{{participant_email}}</li>
-		<li>{{owner_email}}</li>
-		<li>{{status}}</li>
-	{{/volunteers}} -->
+		<div class ="col-sm-12" style = "background-color:white;">
+			<h4>Volunteers</h4>
 
-	<li>{{event_id}}</li>
-	<li>{{event_name}}</li>
-	<li>{{owner_email}}</li>
-	<li>{{description}}</li>
-	<li>{{status}}</li>
-	<li>{{location}}</li>
-	<li>{{zipcode}}</li>
-	<li>{{date_time}}</li>
+			<table class="table table-hover">
+				<thead>
+				  <tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Volunteer Status</th>
+					<th>Accept</th>
+					<th>Deny</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  {{#volunteers}}
+				  <tr>
+					<td>{{first_name}} {{last_name}}</td>
+					<td>{{participant_email}}</td>
+					<td>{{status}}</td>
+					<!-- <td>{{zipcode}}</td> -->
+					<form action="/accept_volunteer" method="post" id="accept_volunteer_form_{{participant_email}}">
+					<input type="hidden" name="event_id" value="{{ event_id }}"/>
+					<input type="hidden" name="participant_email" value="{{ participant_email }}"/>
+					</form>
+					<td><button type="submit" class="btn btn-default" form="accept_volunteer_form_{{participant_email}}">Accept</button></td>
+
+					<form action="/deny_volunteer" method="post" id="deny_volunteer_form_{{participant_email}}">
+					<input type="hidden" name="event_id" value="{{ event_id }}"/>
+					<input type="hidden" name="participant_email" value="{{ participant_email }}"/>
+					</form>
+					<td><button type="submit" class="btn btn-default" form="deny_volunteer_form_{{participant_email}}">Deny</button></td>
+
+
+				  </tr>
+				  {{/volunteers}}
+
+				</tbody>
+			  </table><!-- end of table -->
+		</div><!--end of span 12-->
+	</div><!-- end or row -->
+</div><!--end of container div-->
+<div class="container">
+	<footer class="footer">
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+</div>
   </body>
 </html>
+
+
+

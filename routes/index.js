@@ -19,13 +19,19 @@ router
 	   		// res.render('index', { zipcode: zipcode[0].zipcode });
 	   		db("events")
 		      .where("zipcode", user[0].zipcode)
+		      .where("status", 1)
 		      .then((events) => {
 		      	db("events")
 			      .where("owner_email", req.user.email)
+			      .where("status", 1)
+			      .orWhere("status", 2)
 			      .then((owner_events) => {
 			        db("volunteers")
 			          .innerJoin('events', 'volunteers.event_id', '=', 'events.event_id')
 				      .where("participant_email", req.user.email)
+				      .where("volunteers.status", ">", 0)
+				      .where("events.status", ">", 0)
+				      .where("events.status", "<", 3)
 				      .then((volunteer_events) => {
 				      	// res.send(volunteer_events)
 				        res.render("index", {
