@@ -1,25 +1,99 @@
-<form action="/create_event" method="post">
-  <div>
-    <label>Event Name:</label>
-    <input type="text" name="event_name" value="test event"/>
-  </div>
-  <div>
-    <label>Event Description:</label>
-    <input type="text" name="event_description" value="test description"/>
-  </div>
-  <div>
-    <label>Event Location:</label>
-    <input type="text" name="event_location" value="test location"/>
-  </div>
-  <div>
-    <label>Event Zipcode:</label>
-    <input type="text" name="event_zipcode" value="12345"/>
-  </div>
-  <div>
-    <label>Event Date Time</label>
-    <input type="text" name="event_date_time" value="1000-01-01 00:00:00"/>
-  </div>
-  <div>
-    <input type="submit" value="Create Event"/>
-  </div>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Community - Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" media="screen" charset="utf-8" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/custom/style.css" media="screen" charset="utf-8" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <div class="container-fluid community-nav">
+      <nav class="navbar navbar-default navbar-custom">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo">
+          </a>
+        </div>
+        <div id="navbar2" class="navbar-collapse collapse">
+        <div>
+         <ul class="nav navbar-nav">
+			  <li class="active"><a href="/">Home</a></li>
+			  <li><a href="#">Page 1</a></li>
+        <li><a href="#">Page 2</a></li>
+			</ul>
+		</div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
+          <li><a class="logout-button" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+			</ul>
+
+        </div> <!--/.nav-collapse -->
+      </nav>
+    </div> <!--/.container-fluid -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-8">
+                  <form action="/create_event" method="post">
+                    <div class="form-group">
+                      <label for="city">Create Event</label>
+                      <input type="text" name="event_name" class="form-control" placeholder="Event Title" required />
+                    </div>
+                    <div class="form-group">
+                      <textarea class="form-control" name="event_description" placeholder="Event Description" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label for="city">Event Location</label>
+                      <input type="text" name="event_location" class="form-control" placeholder="Full Address" id="city" required/>
+                      <input type="text" name="event_zipcode" class="form-control" placeholder="Zipcode" id="zipcode" required/>
+                    </div>
+                    <div class="form-group">
+                      <label for="date_time">Event Date</label>
+                      <input type="text" name="event_date_time" class="form-control" placeholder="Date, Time" id="date_time" required/>
+                    </div>
+                    <div>
+
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+                </div>
+                <div class="col-md-4">
+                  upload image....
+                  <img class="img-responsive center-block" src="/images/globe.png" alt="Globe">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+
+    </div> <!-- /container -->
+    <script src="/jquery/jquery.min.js" charset="utf-8"></script>
+    <script src="/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+  </body>
+</html>

@@ -24,7 +24,7 @@
   <body>
 
 <div class="container-fluid community-nav">
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-default navbar-custom">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
             <span class="sr-only">Toggle navigation</span>
@@ -34,20 +34,20 @@
           </button>
           <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo">
           </a>
-
         </div>
         <div id="navbar2" class="navbar-collapse collapse">
         <div>
          <ul class="nav navbar-nav">
-			  <li class="active"><a href="/">Home</a></li>
-			  <li><a href="#">Page 1</a></li>
-			  <li><a href="#">Page 2</a></li>
-			</ul>
-		</div>
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="#">Page 1</a></li>
+        <li><a href="#">Page 2</a></li>
+      </ul>
+    </div>
         <ul class="nav navbar-nav navbar-right">
-			  <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-			</ul>
-          
+          <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
+          <li><a class="logout-button" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+
         </div> <!--/.nav-collapse -->
       </nav>
     </div> <!--/.container-fluid -->
@@ -84,18 +84,16 @@
 			</div>  <!--/ where -->
 			</div>  <!--/ col-md-7 -->
 		
-			<div class="col-md-5"><img src="/images/beach-clean.png" alt="Beach" style="width:480px;height:360px;"> </div>
+			<div class="col-md-5"><img class="img-responsive center-block" src="/images/globe.png" alt="Globe"> </div>
     </div> <!--/ row -->
 </div> <!--/ container -->
 
 
-<div id="footer">
-		<div class="container">
-        <p>community</p>
-        <p>Building Stronger Relationships With Our Neighbors.</p>
-        
-      </div>
-	</div><!-- end footer -->
+<div class="container-fluid">
+  <footer class="footer">
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+</div>
 
 
   </body>
