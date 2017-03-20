@@ -65,7 +65,7 @@
                     </div>
                     <div class="form-group">
                       <label for="city">Event Location</label>
-                      <input type="text" name="event_location" class="form-control" placeholder="City" id="city" required/>
+                      <input type="text" name="event_location" class="form-control" placeholder="Full Address" id="city" required/>
                       <input type="text" name="event_zipcode" class="form-control" placeholder="Zipcode" id="zipcode" required/>
                     </div>
                     <div class="form-group">
@@ -80,12 +80,13 @@
                 </div>
                 <div class="col-md-4">
                   upload image....
-                  <img class="img-responsive center-block" src="images/globe.png" alt="Globe">
+                  <img class="img-responsive center-block" src="/images/globe.png" alt="Globe">
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
       <footer class="footer">
         <p>&copy; 2016 Company, Inc.</p>
