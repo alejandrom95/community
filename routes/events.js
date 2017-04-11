@@ -2,6 +2,7 @@ var express = require('express');
 const passport = require("passport")
 const router = require("express").Router()
 const db = require("../db")
+var Promise = require('bluebird');
 
 function loginRequired(req, res, next) {
   if (!req.isAuthenticated()) {
@@ -335,7 +336,6 @@ router
         
       })
 
-      //alter get for evnet, make sure you display all people who have applied for event during event get method: line 81
     
   })
   .post("/deny_volunteer", loginRequired, (req, res, next) => {
@@ -400,5 +400,66 @@ router
       })
     
   })
+  .post("/search_event", loginRequired, (req, res, next) => {
+    var search_zipcode = req.body.search_zipcode;
+    var search_keyword = req.body.search_keyword;
+    var flag = true;
+    if(search_zipcode === '' && search_keyword === '') {
+      res.redirect("/")
+    }
+    else if(search_zipcode === '' && search_keyword !== '') {
+///////////////////////////////////////////////////////////////////////////
+//       // var arr = [];
+      search_keyword = search_keyword.trim();
+      var keyWords = search_keyword.split(" ");
+      
+
+      searchEventsByKeywordLoop(keyWords, 0, keyWords.length)
+      .then(function(result) {
+        res.send(result)
+      })
+      
+///////////////////////////////////////////////////////////////////////////
+
+    }
+    else if(search_zipcode !== '' && search_keyword === '') {
+      searchEventsByZipcode(search_zipcode)
+      .then(function(ret) {
+        res.send(ret)
+      })
+    }
+    else if(search_zipcode !== '' && search_keyword !== '') {
+      
+    }
+
+
+  })
+  function searchEventsByKeywordLoop(keyWords, currentValue, length, results) {
+    var r = results || [];
+    return searchEventsByKeyword(currentValue, keyWords[0]).then(function(count){
+          r.push(count[1])
+          currentValue = count[0];
+          keyWords.shift();
+          return (count[0] < length) ? searchEventsByKeywordLoop(keyWords, currentValue, length, r) : r
+        })
+  }
+  var searchEventsByKeyword = Promise.method(function(count, keyword){
+    return db("events")
+    .where('event_name', 'like', '%'+keyword+'%')
+    .then((result) => {
+      var temp = []
+      temp.push(++count)
+      temp.push(result)
+      return temp;
+    })
+})
+
+  function searchEventsByZipcode(z) {
+    return db("events")
+    .where("zipcode", z)
+    .then((events_by_zipcode) => {
+      return events_by_zipcode;
+    });
+  }
 
 module.exports = router
