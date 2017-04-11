@@ -41,16 +41,27 @@
         </div>
         <div id="navbar2" class="navbar-collapse collapse">
         <div>
-         <ul class="nav navbar-nav">
-			  <li class="active"><a href="/">Home</a></li>
-			  <li><a href="#">Page 1</a></li>
-			  <li><a href="#">Page 2</a></li>
-			</ul>
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="/">Home</a></li>
+			<li><a href="#">Page 1</a></li>
+			<li><a href="#">Page 2</a></li>
+		</ul>
 		</div>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
-			  <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-			</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+		<li>
+			<form action="/search_event" method="post">
+                  <input name="search_zipcode" id="search-zipcode" type="text" class="form-control" aria-label="..." placeholder="ZIPCODE">
+                  <input name="search_keyword" id="search-keyword" type="text" class="form-control" aria-label="..." placeholder="KEYWORD">
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            </li>
+			<!-- <li><input id="search-zipcode" type="text" class="form-control" aria-label="..." placeholder="ZIPCODE"></li>
+			<li><input id="search-keyword" type="text" class="form-control" aria-label="..." placeholder="KEYWORD"></li> -->
+			<li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
+			<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+		</ul>
 
         </div> <!--/.nav-collapse -->
       </nav>
