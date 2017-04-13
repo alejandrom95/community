@@ -38,13 +38,14 @@ router
 				        	zipcode: user[0].zipcode,
 				          events: events,
 				          owner_events: owner_events,
-				          volunteer_events: volunteer_events
+				          volunteer_events: volunteer_events,
+                  user: user
 				        })
 				      })
 			        })
 			      })
 		      })
-	  
+
 	});
 
 module.exports = router;
