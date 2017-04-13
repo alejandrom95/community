@@ -434,6 +434,11 @@ router
 
 
   })
+
+  .get("/search_results", loginRequired, (req, res, next) => {
+      res.render("search_results")
+    })
+
   function searchEventsByKeywordLoop(keyWords, currentValue, length, results) {
     var r = results || [];
     return searchEventsByKeyword(currentValue, keyWords[0]).then(function(count){
