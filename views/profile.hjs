@@ -1,8 +1,233 @@
-{{#users}} 
+<!doctype html>
+<html lang="en-US">
+<head>
 
-<li>{{email}}</li>
-<li>{{first_name}}</li>
-<li>{{last_name}}</li>
-<li>{{zipcode}}</li>
-<li>{{rating}}</li>
-{{/users}}
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Community - Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" media="screen" charset="utf-8" rel="stylesheet">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--Bootstrap core CSS-->
+	<!--<link href="/bootstrap/css/bootstrap.min.css" media="screen" charset="utf-8" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" media="all" href="css/global.css"> -->
+	<link rel="stylesheet" type="text/css" media="all" href="/custom/tools.css">
+	<link rel="stylesheet" type="text/css" media="all" href="/custom/style.css">
+</head>
+
+<body>
+  <div class="container-fluid community-nav">
+        <nav class="navbar navbar-default">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo">
+            </a>
+
+          </div>
+          <div id="navbar2" class="navbar-collapse collapse">
+          <div>
+  		<ul class="nav navbar-nav">
+  			<li><a href="/">Home</a></li>
+  			<li class="active"><a href="/profile">Profile</a></li>
+  			<li><a href="#">Page 2</a></li>
+        <li>
+          <form class="form-inline" action="/search_event" method="post">
+            <div class="form-group">
+              <input type="text" id="search_keyword" name="search_keyword" class="form-control" aria-label="..." placeholder="Keyword">
+            </div>
+            <div class="input-group">
+              <input type="text" name="search_zipcode" id="search-zipcode" class="form-control" aria-label="..." placeholder="Zipcode">
+              <span class="input-group-btn">
+                <button type="submit" id="search_button" class="btn btn-default">Search</button>
+              </span>
+            </div>
+          </form>
+        </li>
+  		</ul>
+  		</div>
+
+  		<ul class="nav navbar-nav navbar-right">
+  			<!-- <li><input id="search-zipcode" type="text" class="form-control" aria-label="..." placeholder="ZIPCODE"></li>
+  			<li><input id="search-keyword" type="text" class="form-control" aria-label="..." placeholder="KEYWORD"></li> -->
+  			<li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
+  			<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+  		</ul>
+
+      </div> <!--/.nav-collapse -->
+    </nav>
+  </div> <!--/.container-fluid -->
+
+  <div class="container-fluid community-profile">
+    {{#users}}
+    <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+      <div class="profile-border">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="media">
+              <div align="center">
+                <img class="thumbnail img-responsive" src="images/default.jpg" alt="Default profile" width="300px" height="300px">
+              </div>
+              <!-- <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+              </button> -->
+              <div class="media-body">
+                <hr>
+                <h3><strong>Bio</strong><button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </button></h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+                <hr>
+                <h3><strong>Location</strong><button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </button></h3>
+                <p>{{zipcode}}</p>
+                <hr>
+                <h3><strong>Gender</strong><button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </button></h3>
+                <p>Male</p>
+                <hr>
+                <h3><strong>Birthday</strong><button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </button></h3>
+                <p>January 01, 1994</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        <div class="profile-border">
+          <div class="panel panel-default">
+              <div class="panel-body">
+                  <span>
+                      <h1 class="panel-title pull-left" style="font-size:30px;">{{first_name}} {{last_name}} <small>{{email}}</small><button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </button></h1>
+                  </span>
+                  <br><br>
+                  <p>Owner Rating: {{rating}}</p>
+                  <p>Volunteer Rating: {{rating}}</p>
+                  <br><br><hr>
+                  <span class="pull-left">
+                      <a href="#" class="btn btn-link" style="text-decoration:none;"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> Reviews</a>
+                      <a href="#" class="btn btn-link" style="text-decoration:none;"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Events <span class="badge">5</span></a>
+                      <a href="#" class="btn btn-link" style="text-decoration:none;"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Volunteered <span class="badge">11</span></a>
+                  </span>
+              </div>
+          </div>
+        </div>
+        <hr>
+        <!-- Simple post content example. -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <a href="#">
+                        <img class="media-object img-circle" src="images/default.jpg" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                    </a>
+                </div>
+                <h4><a href="#" style="text-decoration:none;"><strong>John Doe</strong> rated you</a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> 42 minutes ago</i></a></small></small></h4>
+                <span>
+                  <div class="navbar-right">
+                      <div class="dropdown">
+                          <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
+                              <li><a href="#"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Hide</a></li>
+                              <li role="separator" class="divider"></li>
+                              <li><a href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</a></li>
+                          </ul>
+                      </div>
+                  </div>
+                </span>
+                <hr>
+                <div class="post-content">
+                    <h5>5 stars</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+                </div>
+                <hr>
+                <div>
+                    <div class="pull-left btn-group-xs">
+                        <a class="btn btn-default btn-xs"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like</a>
+                        <a class="btn btn-default btn-xs"><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Reshare</a>
+                        <a class="btn btn-default btn-xs"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</a>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- Simple post content example. -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <a href="#">
+                        <img class="media-object img-circle" src="images/default.jpg" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                    </a>
+                </div>
+                <h4><a href="#" style="text-decoration:none;"><strong>{{first_name}} {{last_name}}</strong> created an event</a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> 42 minutes ago</i></a></small></small></h4>
+                <span>
+                    <div class="navbar-right">
+                        <div class="dropdown">
+                            <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
+                                <li><a href="#"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>Hide</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+                <hr>
+                <div class="post-content">
+                    <h5>Event Name</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel gravida metus, non ultrices sapien. Morbi odio metus, dapibus non nibh id amet.</p>
+                </div>
+                <hr>
+                <div>
+                    <div class="pull-left btn-group-xs">
+                        <a class="btn btn-default btn-xs"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Like</a>
+                        <a class="btn btn-default btn-xs"><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span> Reshare</a>
+                        <a class="btn btn-default btn-xs"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</a>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+      {{/users}}
+  </div>
+
+
+
+
+	<div id="footer">
+		<div class="container">
+        <p>community</p>
+        <p>Building Stronger Relationships With Our Neighbors.</p>
+
+      </div>
+	</div><!-- end footer -->
+	<script src="/jquery/jquery.min.js" charset="utf-8"></script>
+    <script src="/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    </script>
+</body><!-- end body -->
+</html><!-- end html -->
