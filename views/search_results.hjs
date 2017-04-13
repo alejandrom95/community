@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Community - Search Events</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" media="screen" charset="utf-8" rel="stylesheet">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--Bootstrap core CSS-->
+	<!--<link href="/bootstrap/css/bootstrap.min.css" media="screen" charset="utf-8" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" media="all" href="css/global.css"> -->
+	<link rel="stylesheet" type="text/css" media="all" href="/custom/tools.css">
+	<link rel="stylesheet" type="text/css" media="all" href="/custom/style.css">
+</head>
+
+<body>
+<div class="container-fluid community-nav">
+      <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo">
+          </a>
+
+        </div>
+        <div id="navbar2" class="navbar-collapse collapse">
+        <div>
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="/">Home</a></li>
+			<li><a href="#">Page 1</a></li>
+			<li><a href="#">Page 2</a></li>
+		</ul>
+		</div>
+
+		<ul class="nav navbar-nav navbar-right">
+		<li>
+			<form action="/search_event" method="post">
+                  <input name="search_zipcode" id="search-zipcode" type="text" class="form-control" aria-label="..." placeholder="ZIPCODE">
+                  <input name="search_keyword" id="search-keyword" type="text" class="form-control" aria-label="..." placeholder="KEYWORD">
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            </li>
+			<!-- <li><input id="search-zipcode" type="text" class="form-control" aria-label="..." placeholder="ZIPCODE"></li>
+			<li><input id="search-keyword" type="text" class="form-control" aria-label="..." placeholder="KEYWORD"></li> -->
+			<li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
+			<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+		</ul>
+
+        </div> <!--/.nav-collapse -->
+      </nav>
+    </div> <!--/.container-fluid -->
+
+<!-- -->
+	<!--<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"><img src="images/community-logo.png" alt="Cinque Terre"> </img></a>
+			</div>
+			<ul class="nav navbar-nav">
+			  <li class="active"><a href="#">Home</a></li>
+			  <li><a href="#">Page 1</a></li>
+			  <li><a href="#">Page 2</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+			  <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+			</ul>
+		</div>
+	</nav> -->
+	</div>
+	<div class="container-fluid">
+		<div class="well"><h2>Events</h2></div>
+			</div><!--end of span 4 -->
+			<div class ="col-sm-12" style = "background-color:white;">
+				<h4>Search Results</h4>
+
+				<table class="table table-hover">
+					<thead>
+					  <tr>
+						<th>Event</th>
+						<th>Date</th>
+						<th>Location</th>
+						<!-- <th>Zipcode</th> -->
+						<th>Request to Join</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  {{#events}}
+					  <tr>
+						<td><a href="/event/{{event_id}}">{{event_name}}</a></td>
+						<td>{{date_time}}</td>
+						<td>{{location}}</td>
+						<!-- <td>{{zipcode}}</td> -->
+						<form action="/request_to_join_event" method="post" id="join_event_form_{{event_id}}">
+						<input type="hidden" name="event_id" value="{{ event_id }}"/>
+						</form>
+						<td><button type="submit" class="btn btn-default" form="join_event_form_{{event_id}}">Volunteer</button></td>
+					  </tr>
+					  {{/events}}
+
+					</tbody>
+				  </table><!-- end of table -->
+				<!-- <ul class="pager">
+					<li><a href="#">Previous</a></li>
+					<li><a href="#">Next</a></li>
+				</ul> -->
+			</div><!--end of span 4-->
+		</div><!-- end or row -->
+	</div><!--end of container div-->
+
+	<div id="footer">
+		<div class="container">
+        <p>community</p>
+        <p>Building Stronger Relationships With Our Neighbors.</p>
+
+      </div>
+	</div><!-- end footer -->
+	<script src="/jquery/jquery.min.js" charset="utf-8"></script>
+    <script src="/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    </script>
+</body><!-- end body -->
+</html><!-- end html -->
