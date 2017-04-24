@@ -23,8 +23,9 @@ router
 		      .then((events) => {
 		      	db("events")
 			      .where("owner_email", req.user.email)
-			      .where("status", 1)
-			      .orWhere("status", 2)
+			      .where(function() {
+				    this.where('status', 1).orWhere('status', 2)
+				  })
 			      .then((owner_events) => {
 			        db("volunteers")
 			          .innerJoin('events', 'volunteers.event_id', '=', 'events.event_id')
