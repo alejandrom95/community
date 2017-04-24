@@ -33,9 +33,6 @@ router
         res.redirect("/")
     }, next)
   })
-  .get("/close_event", loginRequired, (req, res, next) => {
-    res.render("close_event")
-  })
   .post("/close_event", loginRequired, (req, res, next) => {
     const event_id = parseInt(req.body.event_id);
     const new_status = parseInt(req.body.status);
@@ -51,14 +48,50 @@ router
         if(result === 0) {
           return res.send(400)
         }
-        // res.send(200)
-        var retDir = "/o_event/" + event_id;
-        res.redirect(retDir)
+        var d = new Date();
+        var month = d.getMonth()
+        if(month < 10) month = "0" + month
+        var day = d.getDate()
+        if(day < 10) day = "0" + day
+        var hours = d.getHours()
+        if(hours < 10) hours = "0" + hours
+        var minutes = d.getMinutes()
+        if(minutes < 10) minutes = "0" + minutes
+        var seconds = d.getSeconds()
+        if(seconds < 10) seconds = "0" + seconds
+        var dateTime = d.getFullYear() + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
+
+        db("events")
+        .where("event_id", event_id)
+        .where("owner_email", req.user.email)
+        .then((event) => {
+
+          db("volunteers")
+          .where("event_id", event_id)
+          .where("owner_email", req.user.email)
+          .then((volunteers) => {
+            var volunteersEmailList = [];
+            for(var i = 0; i < volunteers.length; i++) {
+              volunteersEmailList.push(volunteers[i].participant_email)
+            }
+            var eventName = event[0].event_name
+            var newNotificationDetails = {
+              description: "The event " + eventName+ " has been closed.",
+              date_time: dateTime,
+              type: 4
+            };
+            addNotificationsLoop(volunteersEmailList, 0, volunteersEmailList.length, newNotificationDetails)
+            .then(function(result) {
+              var retDir = "/o_event/" + event_id;
+              res.redirect(retDir)
+            })
+
+          })
+        }) 
+
+        
     }, next)
 
-  })
-  .get("/cancel_event", loginRequired, (req, res, next) => {
-    res.render("cancel_event")
   })
   .post("/cancel_event", loginRequired, (req, res, next) => {
     const event_id = parseInt(req.body.event_id);
@@ -75,9 +108,47 @@ router
         if(result === 0) {
           return res.send(400)
         }
-        var retDir = "/o_event/" + event_id;
-        res.redirect(retDir)
-    }, next)
+        var d = new Date();
+        var month = d.getMonth()
+        if(month < 10) month = "0" + month
+        var day = d.getDate()
+        if(day < 10) day = "0" + day
+        var hours = d.getHours()
+        if(hours < 10) hours = "0" + hours
+        var minutes = d.getMinutes()
+        if(minutes < 10) minutes = "0" + minutes
+        var seconds = d.getSeconds()
+        if(seconds < 10) seconds = "0" + seconds
+        var dateTime = d.getFullYear() + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
+
+        db("events")
+        .where("event_id", event_id)
+        .where("owner_email", req.user.email)
+        .then((event) => {
+
+          db("volunteers")
+          .where("event_id", event_id)
+          .where("owner_email", req.user.email)
+          .then((volunteers) => {
+            var volunteersEmailList = [];
+            for(var i = 0; i < volunteers.length; i++) {
+              volunteersEmailList.push(volunteers[i].participant_email)
+            }
+            var eventName = event[0].event_name
+            var newNotificationDetails = {
+              description: "The event " + eventName+ " has been cancelled.",
+              date_time: dateTime,
+              type: 5
+            };
+            addNotificationsLoop(volunteersEmailList, 0, volunteersEmailList.length, newNotificationDetails)
+            .then(function(result) {
+              var retDir = "/o_event/" + event_id;
+              res.redirect(retDir)
+            })
+
+          })
+        })
+      }, next)
 
   })
   .post("/open_event", loginRequired, (req, res, next) => {
@@ -95,9 +166,47 @@ router
         if(result === 0) {
           return res.send(400)
         }
-        var retDir = "/o_event/" + event_id;
-        res.redirect(retDir)
-    }, next)
+        var d = new Date();
+        var month = d.getMonth()
+        if(month < 10) month = "0" + month
+        var day = d.getDate()
+        if(day < 10) day = "0" + day
+        var hours = d.getHours()
+        if(hours < 10) hours = "0" + hours
+        var minutes = d.getMinutes()
+        if(minutes < 10) minutes = "0" + minutes
+        var seconds = d.getSeconds()
+        if(seconds < 10) seconds = "0" + seconds
+        var dateTime = d.getFullYear() + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
+
+        db("events")
+        .where("event_id", event_id)
+        .where("owner_email", req.user.email)
+        .then((event) => {
+
+          db("volunteers")
+          .where("event_id", event_id)
+          .where("owner_email", req.user.email)
+          .then((volunteers) => {
+            var volunteersEmailList = [];
+            for(var i = 0; i < volunteers.length; i++) {
+              volunteersEmailList.push(volunteers[i].participant_email)
+            }
+            var eventName = event[0].event_name
+            var newNotificationDetails = {
+              description: "The event " + eventName+ " has been reopened.",
+              date_time: dateTime,
+              type: 6
+            };
+            addNotificationsLoop(volunteersEmailList, 0, volunteersEmailList.length, newNotificationDetails)
+            .then(function(result) {
+              var retDir = "/o_event/" + event_id;
+              res.redirect(retDir)
+            })
+
+          })
+        })
+      }, next)
 
   })
   .get("/event/:event_id", loginRequired, (req, res, next) => {
@@ -296,7 +405,42 @@ router
                   if(result === 0) {
                     return res.send(400)
                   }
-                  res.redirect("/")
+                  db("events")
+                    .where("event_id", event_id)
+                    .then((event) => {
+                      var d = new Date();
+                      var month = d.getMonth()
+                      if(month < 10) month = "0" + month
+                      var day = d.getDate()
+                      if(day < 10) day = "0" + day
+                      var hours = d.getHours()
+                      if(hours < 10) hours = "0" + hours
+                      var minutes = d.getMinutes()
+                      if(minutes < 10) minutes = "0" + minutes
+                      var seconds = d.getSeconds()
+                      if(seconds < 10) seconds = "0" + seconds
+                      var dateTime = d.getFullYear() + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
+
+                      var eventName = event[0].event_name
+
+                      var newNotification = {
+                        email: req.user.email,
+                        description: "The volunteer " + req.user.first_name + " " + req.user.last_name + " has cancelled their volunteer request to "+ eventName+ ".",
+                        date_time: dateTime,
+                        type: 3
+                      };
+
+                      db("notifications")
+                      .insert(newNotification)
+                      .then(function(ids) {
+                        var retDir = "/event/" + event_id;
+                        res.redirect(retDir)
+                      }, next)
+                    })
+
+
+
+
                 }, next)
               
             }
@@ -325,10 +469,37 @@ router
               if(result === 0) {
                 return res.send(400)
               }
-              // res.send(200)
-              var retDir = "/o_event/" + event_id;
-              res.redirect(retDir)
-          }, next)
+              var d = new Date();
+              var month = d.getMonth()
+              if(month < 10) month = "0" + month
+              var day = d.getDate()
+              if(day < 10) day = "0" + day
+              var hours = d.getHours()
+              if(hours < 10) hours = "0" + hours
+              var minutes = d.getMinutes()
+              if(minutes < 10) minutes = "0" + minutes
+              var seconds = d.getSeconds()
+              if(seconds < 10) seconds = "0" + seconds
+              var dateTime = d.getFullYear() + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
+
+              var eventName = events[0].event_name
+
+              var newNotification = {
+                email: participant_email,
+                description: "Volunteer request to " + eventName+ " has been accepted.",
+                date_time: dateTime,
+                type: 5
+              };
+
+              db("notifications")
+              .insert(newNotification)
+              .then(function(ids) {
+                var retDir = "/o_event/" + event_id;
+                res.redirect(retDir)
+              }, next)
+
+              
+            }, next)
         }
         else {
           res.redirect('/')
@@ -358,10 +529,37 @@ router
               if(result === 0) {
                 return res.send(400)
               }
-              // res.send(200)
-              var retDir = "/o_event/" + event_id;
-              res.redirect(retDir)
-          }, next)
+              var d = new Date();
+              var month = d.getMonth()
+              if(month < 10) month = "0" + month
+              var day = d.getDate()
+              if(day < 10) day = "0" + day
+              var hours = d.getHours()
+              if(hours < 10) hours = "0" + hours
+              var minutes = d.getMinutes()
+              if(minutes < 10) minutes = "0" + minutes
+              var seconds = d.getSeconds()
+              if(seconds < 10) seconds = "0" + seconds
+              var dateTime = d.getFullYear() + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
+
+              var eventName = events[0].event_name
+
+              var newNotification = {
+                email: participant_email,
+                description: "Volunteer request to " + eventName+ " has been denied.",
+                date_time: dateTime,
+                type: 2
+              };
+
+              db("notifications")
+              .insert(newNotification)
+              .then(function(ids) {
+                var retDir = "/o_event/" + event_id;
+                res.redirect(retDir)
+              }, next)
+
+              
+            }, next)
         }
         else {
           res.redirect('/')
@@ -407,38 +605,69 @@ router
     if(search_zipcode === '' && search_keyword === '') {
       res.redirect("/")
     }
-    else if(search_zipcode === '' && search_keyword !== '') {
-///////////////////////////////////////////////////////////////////////////
-//       // var arr = [];
-      search_keyword = search_keyword.trim();
-      var keyWords = search_keyword.split(" ");
-      
-
-      searchEventsByKeywordLoop(keyWords, 0, keyWords.length)
-      .then(function(result) {
-        res.send(result)
-      })
-      
-///////////////////////////////////////////////////////////////////////////
-
-    }
     else if(search_zipcode !== '' && search_keyword === '') {
       searchEventsByZipcode(search_zipcode)
-      .then(function(ret) {
-        res.send(ret)
+      .then(function(eByZipcode) {
+        res.send(eByZipcode)
+        // res.render(eByZipcode, {})
+      })
+    }
+    else if(search_zipcode === '' && search_keyword !== '') {
+      search_keyword = search_keyword.trim();
+      var keyWords = search_keyword.split(" ");
+
+      searchEventsByKeywordLoop(keyWords, 0, keyWords.length)
+      .then(function(eByKeyword) {
+        var eventsByKeyword = []
+        for(var i = 0; i < eByKeyword.length; i++) {
+          if(eByKeyword[i].length > 0) {
+            eventsByKeyword = filterSearchByKeyword(eByKeyword[i], eventsByKeyword)
+          }
+        }
+        res.send(eventsByKeyword)
       })
     }
     else if(search_zipcode !== '' && search_keyword !== '') {
-      
+      search_keyword = search_keyword.trim();
+      var keyWords = search_keyword.split(" ");
+
+      searchEventsByZipcode(search_zipcode)
+      .then(function(eByZipcode) {
+        var eventsByZipcodeAndKeyword = []
+        for(var i = 0; i < eByZipcode.length; i++) {
+          for(var j = 0; j < keyWords.length; j++) {
+            if(eByZipcode[i].event_name.includes(keyWords[j])) {
+              eventsByZipcodeAndKeyword.push(eByZipcode[i])
+            }
+          }
+        }
+        res.send(eventsByZipcodeAndKeyword)
+      })
     }
-
-
+  })
+  .get("/search_results", loginRequired, (req, res, next) => {
+    res.render("search_results")
   })
 
-  .get("/search_results", loginRequired, (req, res, next) => {
-      res.render("search_results")
-    })
+  function filterSearchByKeyword(events, eventsByKeyword) {
+    var flagAddEvent = true
+    for(var i = 0; i < events.length; i++) {
+      var flagAddEvent = true
 
+      if(eventsByKeyword.length > 0) {
+        for(var j = 0; j < eventsByKeyword.length; j++) {
+          if(events[i].event_id === eventsByKeyword[j].event_id) {
+            flagAddEvent = false
+            break;
+          }
+        }
+      }
+      if(flagAddEvent) {
+        eventsByKeyword.push(events[i])
+      }
+    }
+    return eventsByKeyword
+  }
   function searchEventsByKeywordLoop(keyWords, currentValue, length, results) {
     var r = results || [];
     return searchEventsByKeyword(currentValue, keyWords[0]).then(function(count){
@@ -457,7 +686,7 @@ router
       temp.push(result)
       return temp;
     })
-})
+  })
 
   function searchEventsByZipcode(z) {
     return db("events")
@@ -466,5 +695,26 @@ router
       return events_by_zipcode;
     });
   }
+
+  function addNotificationsLoop(emails, currentValue, length, newNotificationDetails) {
+    return addNotification(currentValue, emails[0], newNotificationDetails).then(function(id){
+          ++currentValue;
+          emails.shift();
+          return (currentValue < length) ? addNotificationsLoop(emails, currentValue, length, newNotificationDetails) : 0
+        })
+  }
+  var addNotification = Promise.method(function(count, email, newNotificationDetails){
+
+    var newNotification = {
+      email: email,
+      description: newNotificationDetails.description,
+      date_time: newNotificationDetails.date_time,
+      type: newNotificationDetails.type
+    };
+
+    return db("notifications")
+      .insert(newNotification)
+
+  })
 
 module.exports = router
