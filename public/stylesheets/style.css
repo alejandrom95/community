@@ -62,11 +62,11 @@
   color: white;
 }
 
-.panel-primary {
+.login-banner .panel-primary {
   border-color: transparent;
 }
 
-.panel {
+.login-banner .panel {
   background-color: #f8f8f9;
   border-top: 8px solid #313a40;
 }
@@ -177,4 +177,17 @@
 
 .glyphicon {
   margin-right:5px;
+}
+
+.post-content {
+    margin-left:58px;
+}
+
+.login-banner .panel-primary {
+  border-color: transparent;
+}
+
+.profile-border .panel {
+  background-color: #f8f8f9;
+  border-top: 8px solid #313a40;
 }
