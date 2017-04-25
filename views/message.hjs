@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+  <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" media="screen" charset="utf-8" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/custom/style.css" media="screen" charset="utf-8" rel="stylesheet">
+
+
+    <title>Event</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    {{sendee_email}}
+    {{owner_email}}
+    <div>
+    <h1>{{event_name}}</h1>
+    <form action="/send_message" method="POST">
+      <div>
+      <!--  <input type="text" name="message" placeholder="message" required/> -->
+         <textarea name="message" placeholder="message" rows="5" required></textarea>
+      </div>
+      <div class="form-group">
+
+        <input type="hidden" name="sendee_email" value="{{sendee_email}}"/>
+        
+      </div>
+      <div>
+        <button type="submit" style="margin: 2pt;">Submit</button>
+        <!--<input type="submit" value="Submit"/>-->
+      </div>    
+    </form>
+    </div>
+  </body>
+</html>
+
+                    
+                 
+                   

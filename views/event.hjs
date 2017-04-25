@@ -80,9 +80,14 @@
               <button type="submit" class="btn btn-join" style="margin: 2pt;">Cancel Volunteer Request</button>
             </div>
           </form>
-        </div>
-
-
+          <!-- my edits-->
+          <form action="/message" method = "POST">
+            <div>
+              <input type="hidden" value = "{{owner_email}}" name="owner_email">
+              <input type="submit" value = "Submit">
+            <!--            <button><a href="/message">Message Event Owner</a></button> -->
+            </div>
+          </form>
 				<!-- <br> -->
 				<p><br> {{description}} <br> <br></p>
 			</div> <!--/ eTitle -->
