@@ -12,10 +12,13 @@ function loginRequired(req, res, next) {
 }
 
 router
+  //get for message to display button/form
   .get("/create_event", loginRequired, (req, res, next) => {
     res.render("create_event")
   })
+  //post for view
   .post("/create_event", loginRequired, (req, res, next) => {
+    //creates the object
     var newEvent = {
       event_name: req.body.event_name,
       owner_email: req.user.email,
@@ -26,6 +29,7 @@ router
       date_time: req.body.event_date_time
     };
     // res.render(newEvent);
+    //insert to db
     db("events")
       .insert(newEvent)
       .then((ids) => {
