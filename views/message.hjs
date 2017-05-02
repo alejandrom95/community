@@ -84,8 +84,8 @@
           <tbody>
             {{#messages}}
             <tr>
-           <td>{{date_sent}}</td>
-            <td>{{message}}</td>
+           <td class = "col-xs-8 col-sm-10">{{message}}</td>
+            <td class= "col-xs-4 col-sm-2">{{date_sent}}</td>
             </tr>
            {{/messages}}
 
