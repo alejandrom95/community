@@ -22,8 +22,6 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    {{sendee_email}}
-    {{owner_email}}
     <div>
     <h1>{{event_name}}</h1>
     <form action="/send_message" method="POST">
@@ -34,6 +32,7 @@
       <div class="form-group">
 
         <input type="hidden" name="sendee_email" value="{{sendee_email}}"/>
+        <input type="hidden" name="event_id" value="{{event_id}}"/>
         
       </div>
       <div>

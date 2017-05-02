@@ -155,6 +155,66 @@ router
       }, next)
 
   })
+  .post("/finish_event", loginRequired, (req, res, next) => {
+    const event_id = parseInt(req.body.event_id);
+    const new_status = parseInt(req.body.status);
+
+    db("events")
+      .where("event_id", event_id)
+      .where("owner_email", req.user.email)
+      .update(
+      {
+        status: new_status
+      })
+      .then((result) => {
+        if(result === 0) {
+          return res.send(400)
+        }
+        var retDir = "/rating/" + event_id;
+        res.redirect(retDir)
+        // var d = new Date();
+        // var month = d.getMonth()
+        // if(month < 10) month = "0" + month
+        // var day = d.getDate()
+        // if(day < 10) day = "0" + day
+        // var hours = d.getHours()
+        // if(hours < 10) hours = "0" + hours
+        // var minutes = d.getMinutes()
+        // if(minutes < 10) minutes = "0" + minutes
+        // var seconds = d.getSeconds()
+        // if(seconds < 10) seconds = "0" + seconds
+        // var dateTime = d.getFullYear() + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds
+
+        // db("events")
+        // .where("event_id", event_id)
+        // .where("owner_email", req.user.email)
+        // .then((event) => {
+
+        //   db("volunteers")
+        //   .where("event_id", event_id)
+        //   .where("owner_email", req.user.email)
+        //   .then((volunteers) => {
+        //     var volunteersEmailList = [];
+        //     for(var i = 0; i < volunteers.length; i++) {
+        //       volunteersEmailList.push(volunteers[i].participant_email)
+        //     }
+        //     var eventName = event[0].event_name
+        //     var newNotificationDetails = {
+        //       description: "The event " + eventName+ " has been cancelled.",
+        //       date_time: dateTime,
+        //       type: 5
+        //     };
+        //     addNotificationsLoop(volunteersEmailList, 0, volunteersEmailList.length, newNotificationDetails)
+        //     .then(function(result) {
+        //       var retDir = "/o_event/" + event_id;
+        //       res.redirect(retDir)
+        //     })
+
+        //   })
+        // })
+      }, next)
+
+  })
   .post("/open_event", loginRequired, (req, res, next) => {
     const event_id = parseInt(req.body.event_id);
     const new_status = parseInt(req.body.status);
@@ -612,8 +672,12 @@ router
     else if(search_zipcode !== '' && search_keyword === '') {
       searchEventsByZipcode(search_zipcode)
       .then(function(eByZipcode) {
-        res.send(eByZipcode)
-        // res.render(eByZipcode, {})
+        // res.send(eByZipcode)
+        res.render("search_results", 
+          {
+            events: eByZipcode
+          }
+        )
       })
     }
     else if(search_zipcode === '' && search_keyword !== '') {
@@ -628,7 +692,12 @@ router
             eventsByKeyword = filterSearchByKeyword(eByKeyword[i], eventsByKeyword)
           }
         }
-        res.send(eventsByKeyword)
+        // res.send(eventsByKeyword)
+        res.render("search_results", 
+          {
+            events: eByKeyword
+          }
+        )
       })
     }
     else if(search_zipcode !== '' && search_keyword !== '') {
@@ -645,13 +714,18 @@ router
             }
           }
         }
-        res.send(eventsByZipcodeAndKeyword)
+        // res.send(eventsByZipcodeAndKeyword)
+        res.render("search_results", 
+          {
+            events: eventsByZipcodeAndKeyword
+          }
+        )
       })
     }
   })
-  .get("/search_results", loginRequired, (req, res, next) => {
-    res.render("search_results")
-  })
+  // .get("/search_results", loginRequired, (req, res, next) => {
+  //   res.render("search_results")
+  // })
 
   function filterSearchByKeyword(events, eventsByKeyword) {
     var flagAddEvent = true
@@ -684,6 +758,7 @@ router
   var searchEventsByKeyword = Promise.method(function(count, keyword){
     return db("events")
     .where('event_name', 'like', '%'+keyword+'%')
+    .where("status", 1)
     .then((result) => {
       var temp = []
       temp.push(++count)
@@ -695,6 +770,7 @@ router
   function searchEventsByZipcode(z) {
     return db("events")
     .where("zipcode", z)
+    .where("status", 1)
     .then((events_by_zipcode) => {
       return events_by_zipcode;
     });

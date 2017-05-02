@@ -42,9 +42,9 @@
         <div id="navbar2" class="navbar-collapse collapse">
         <div>
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="/">Home</a></li>
-			<li><a href="/profile">Profile</a></li>
-			<li><a href="#">Page 2</a></li>
+			<li class="active"><a href="/">Dashboard</a></li>
+			<li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span>Create Event</a></li>
+			<!-- <li><a href="#">Page 2</a></li> -->
       <li>
         <form class="form-inline" action="/search_event" method="post">
           <div class="form-group">
@@ -64,7 +64,7 @@
 		<ul class="nav navbar-nav navbar-right">
 			<!-- <li><input id="search-zipcode" type="text" class="form-control" aria-label="..." placeholder="ZIPCODE"></li>
 			<li><input id="search-keyword" type="text" class="form-control" aria-label="..." placeholder="KEYWORD"></li> -->
-			<li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
+
 			<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 		</ul>
 
@@ -88,95 +88,182 @@
 			</ul>
 		</div>
 	</nav> -->
-	<div class = "container text-center">
-		<header id="heading">
-			<img src="images/default.jpg" class="" alt="Default profile" width="300" height="300">
-      {{#user}}
-			<h2>{{first_name}}</h2>
-      {{/user}}
-		</header>
-	</div>
-	<div class="container-fluid">
-		<div class="well"><h2>Events</h2></div>
-		<div class="row">
-		    <!-- might have to change this to col-*-* -->
-			<div class="col-sm-4" sytle="background-color:lavender;">
-				<h4>Your Events</h4>
-				  <table class="table table-bordered">
-					<thead>
-					  <tr>
-						<th>Event</th>
-						<th>Date</th>
-						<th>Location</th>
-					  </tr>
-					</thead>
-					<tbody>
-						{{#owner_events}}
-					  <tr>
-						<td><a href="/o_event/{{event_id}}">{{event_name}}</a></td>
-						<td>{{date_time}}</td>
-						<td>{{location}}</td>
-					  </tr>
-					  	{{/owner_events}}
-					</tbody>
-				  </table>
-				  <h4>Volunteering Events</h4>
-				  <table class="table table-bordered">
-					<thead>
-					  <tr>
-						<th>Event</th>
-						<th>Date</th>
-						<th>Location</th>
-					  </tr>
-					</thead>
-					<tbody>
-						{{#volunteer_events}}
-					  <tr>
-						<td><a href="/event/{{event_id}}">{{event_name}}</a></td>
-						<td>{{date_time}}</td>
-						<td>{{location}}</td>
-					  </tr>
-					  	{{/volunteer_events}}
-					</tbody>
-				  </table>
-				<!-- <button type="button" class="btn btn-default">More Events</button> -->
-			</div><!--end of span 4 -->
-			<div class ="col-sm-8" style = "background-color:white;">
-				<h4>Local Events {{zipcode}}</h4>
+  <div class="container-fluid">
+    <div class="dashboard">
 
-				<table class="table table-hover">
-					<thead>
-					  <tr>
-						<th>Event</th>
-						<th>Date</th>
-						<th>Location</th>
-						<!-- <th>Zipcode</th> -->
-						<th>Request to Join</th>
-					  </tr>
-					</thead>
-					<tbody>
-					  {{#events}}
-					  <tr>
-						<td><a href="/event/{{event_id}}">{{event_name}}</a></td>
-						<td>{{date_time}}</td>
-						<td>{{location}}</td>
-						<!-- <td>{{zipcode}}</td> -->
-						<form action="/request_to_join_event" method="post" id="join_event_form_{{event_id}}">
-						<input type="hidden" name="event_id" value="{{ event_id }}"/>
-						</form>
-						<td><button type="submit" class="btn btn-default" form="join_event_form_{{event_id}}">Volunteer</button></td>
-					  </tr>
-					  {{/events}}
 
-					</tbody>
-				  </table><!-- end of table -->
-				<!-- <ul class="pager">
-					<li><a href="#">Previous</a></li>
-					<li><a href="#">Next</a></li>
-				</ul> -->
-			</div><!--end of span 4-->
-		</div><!-- end or row -->
-	</div><!--end of container div-->
+    <div class="row">
+    	<div class="col-md-3">
+        <div class="profile-border">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="media">
+                <div align="center">
+                  <img class="thumbnail img-responsive" src="images/default.jpg" alt="Default profile" width="300px" height="300px">
+                </div>
+                <!-- <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button> -->
+                <div class="media-body">
+                  <hr>
+                  <!-- <h3><strong>Bio</strong><button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                  </button></h3> -->
+                  <div class="">
+                    <h4>Rating
+                    <span class="glyphicon glyphicon-star pull-right"></span>
+                    <span class="glyphicon glyphicon-star pull-right"></span>
+                    <span class="glyphicon glyphicon-star pull-right"></span>
+                    <span class="glyphicon glyphicon-star pull-right"></span>
+                    <span class="glyphicon glyphicon-star pull-right"></span></h4>
+                  </div>
+                  <h4>Inbox Messages <span class="badge pull-right">3</span></h4>
+                  <h4><a href="/profile">View your Profile</a></h4>
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      	</div><!-- /span-3 -->
+        <div class="col-md-9">
+          	<!-- Right -->
+
+            <h3><strong><span class="glyphicon glyphicon-home"></span> Welcome, {{#user}} {{first_name}} {{last_name}} {{/user}}!</strong></h3>
+
+          	<hr>
+
+    		<div class="row">
+          <div class="col-md-6">
+    				<!-- <div class="well">Inbox Messages <span class="badge pull-right">3</span></div> -->
+
+          	<div class="panel">
+              <!-- <div class="panel-heading text-center"></div> -->
+              <div class="panel-content">
+                <div class="btn-group btn-group-justified">
+                  <a href="#" class="btn btn-primary col-sm-3">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                    <p>Edit Profile</p>
+                  </a>
+                  <a href="#" class="btn btn-primary col-sm-3">
+                    <i class="glyphicon glyphicon-cloud"></i>
+                    <p>Menu 1</p>
+                  </a>
+                  <a href="#" class="btn btn-primary col-sm-3">
+                    <i class="glyphicon glyphicon-cog"></i>
+                    <p>Menu 2</p>
+                  </a>
+                  <a href="#" class="btn btn-primary col-sm-3">
+                    <i class="glyphicon glyphicon-question-sign"></i>
+                    <p>Menu 3</p>
+                  </a>
+                </div>
+              </div><!--/panel content-->
+            </div><!--/panel-->
+
+          <div class="panel panel-default">
+            <div class="panel-heading text-center"><strong>Your Events</strong></div>
+            <table class="table table-bordered">
+  					<thead>
+  					  <tr>
+  						<th>Event</th>
+  						<th>Date</th>
+  						<th>Location</th>
+  					  </tr>
+  					</thead>
+  					<tbody>
+  						{{#owner_events}}
+  					  <tr>
+  						<td><a href="/o_event/{{event_id}}">{{event_name}}</a></td>
+  						<td>{{date_time}}</td>
+  						<td>{{location}}</td>
+  					  </tr>
+  					  	{{/owner_events}}
+  					</tbody>
+  				  </table>
+          </div><!--/panel-->
+
+          <div class="panel panel-default">
+            <div class="panel-heading text-center"><strong>Volunteering Events</strong></div>
+            <table class="table table-bordered">
+  					<thead>
+  					  <tr>
+  						<th>Event</th>
+  						<th>Date</th>
+  						<th>Location</th>
+  					  </tr>
+  					</thead>
+  					<tbody>
+  						{{#volunteer_events}}
+  					  <tr>
+  						<td><a href="/event/{{event_id}}">{{event_name}}</a></td>
+  						<td>{{date_time}}</td>
+  						<td>{{location}}</td>
+  					  </tr>
+  					  	{{/volunteer_events}}
+  					</tbody>
+  				  </table>
+          </div><!--/panel-->
+          <div class="panel panel-default">
+            <div class="panel-heading text-center"><strong>Notifications</strong></div>
+            <div class="panel-body">
+              <table class="table table-bordered">
+              <tbody>
+                {{#notifications}}
+                <tr>
+                <td>{{description}}</td>
+                <td><a href="/remove_notification/{{id}}">Remove</a></td>
+                </tr>
+                {{/notifications}}
+              </tbody>
+              </table>
+            </div>
+          </div><!--/panel-->
+        </div>
+            	<div class="col-md-6">
+    				<div class="panel panel-default">
+                      <div class="panel-heading text-center"><strong>Local Events in {{zipcode}}</strong></div>
+                      <div class="panel-body">
+                        <table class="table table-hover">
+                					<thead>
+                					  <tr>
+                						<th>Event</th>
+                						<th>Date</th>
+                						<th>Location</th>
+                						<!-- <th>Zipcode</th> -->
+                						<th>Request to Join</th>
+                					  </tr>
+                					</thead>
+                					<tbody>
+                					  {{#events}}
+                					  <tr>
+                						<td><a href="/event/{{event_id}}">{{event_name}}</a></td>
+                						<td>{{date_time}}</td>
+                						<td>{{location}}</td>
+                						<!-- <td>{{zipcode}}</td> -->
+                						<form action="/request_to_join_event" method="post" id="join_event_form_{{event_id}}">
+                						<input type="hidden" name="event_id" value="{{ event_id }}"/>
+                						</form>
+                						<td><button type="submit" class="btn btn-default" form="join_event_form_{{event_id}}">Volunteer</button></td>
+                					  </tr>
+                					  {{/events}}
+
+                					</tbody>
+                				  </table><!-- end of table -->
+                      </div>
+                  	</div>
+
+
+    			</div><!--/col-span-6-->
+
+          </div><!--/row-->
+      	</div><!--/col-span-9-->
+    </div>
+    </div>
+    </div>
+    <!-- /Main -->
 
 	<div id="footer">
 		<div class="container">

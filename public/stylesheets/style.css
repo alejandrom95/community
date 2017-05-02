@@ -191,3 +191,7 @@
   background-color: #f8f8f9;
   border-top: 8px solid #313a40;
 }
+
+.dashboard h3 {
+  margin-top: 0;
+}
