@@ -72,7 +72,7 @@
               <button type="submit" class="btn btn-join"  style="margin: 2pt;">Volunteer</button>
             </div>
           </form>
-          <form action="/cancel_volunteer_request" method="post">
+          <form action="/cancel_volunteer_request" method="post"  style="float: left;">
             <div>
               <input type="hidden" name="event_id" value="{{ event_id }}"/>
             </div>
@@ -80,9 +80,25 @@
               <button type="submit" class="btn btn-join" style="margin: 2pt;">Cancel Volunteer Request</button>
             </div>
           </form>
-        </div>
-
-
+          <form action="/message" method="post">
+            <div>
+              <input type="hidden" name="sendee_email" value="{{ owner_email }}"/>
+            </div>
+            <div>
+              <input type="hidden" name="event_id" value="{{ event_id }}"/>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-join" style="margin: 2pt;">Send Message</button>
+            </div>
+          </form>
+          <!-- my edits-->
+          <!-- <form action="/message" method = "POST">
+            <div>
+              <input type="hidden" value = "{{owner_email}}" name="owner_email">
+              <input type="submit" value = "Submit">
+            <!--            <button><a href="/message">Message Event Owner</a></button> - ->
+            </div>
+          </form> -->
 				<!-- <br> -->
 				<p><br> {{description}} <br> <br></p>
 			</div> <!--/ eTitle -->
@@ -93,6 +109,7 @@
 					<br>On {{date_time}}
 				</p>
 			</div>  <!--/ where -->
+      </div>
 			</div>  <!--/ col-md-7 -->
 		
 			<div class="col-md-5"><img class="img-responsive center-block" src="/images/globe.png" alt="Globe"> </div>

@@ -84,7 +84,7 @@
 					    <button type="submit" class="btn btn-join"  style="margin: 2pt;">Close Event</button>
 					  </div>
 					</form>
-					<form action="/cancel_event" method="post">
+					<form action="/cancel_event" method="post"  style="float: left;">
 					  <div>
 					    <input type="hidden" name="event_id" value="{{event_id}}"/>
 					  </div>
@@ -93,6 +93,17 @@
 					  </div>
 					  <div>
 					    <button type="submit" class="btn btn-join" style="margin: 2pt;">Cancel Event</button>
+					  </div>
+					</form>
+					<form action="/finish_event" method="post">
+					  <div>
+					    <input type="hidden" name="event_id" value="{{event_id}}"/>
+					  </div>
+					  <div>
+					    <input type="hidden" name="status" value="4"/>
+					  </div>
+					  <div>
+					    <button type="submit" class="btn btn-join" style="margin: 2pt;">Finish Event</button>
 					  </div>
 					</form>
 				</div>
@@ -172,6 +183,7 @@
 					<th>Volunteer Status</th>
 					<th>Accept</th>
 					<th>Deny</th>
+					<th>Message</th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -192,6 +204,11 @@
 					<input type="hidden" name="participant_email" value="{{ participant_email }}"/>
 					</form>
 					<td><button type="submit" class="btn btn-default" form="deny_volunteer_form_{{participant_email}}">Deny</button></td>
+					<form action="/message" method="post" id="message_volunteer_form_{{participant_email}}">
+		              <input type="hidden" name="sendee_email" value="{{ participant_email }}"/>
+		              <input type="hidden" name="event_id" value="{{ event_id }}"/>
+		          	</form>
+		          	<td><button type="submit" class="btn btn-default" form="message_volunteer_form_{{participant_email}}">Send Message</button></td>
 
 
 				  </tr>
