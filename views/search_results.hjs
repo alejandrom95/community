@@ -106,11 +106,9 @@
 						<td><a href="/event/{{event_id}}">{{event_name}}</a></td>
 						<td>{{date_time}}</td>
 						<td>{{location}}</td>
-						<!-- <td>{{zipcode}}</td> -->
-						<form action="/request_to_join_event" method="post" id="join_event_form_{{event_id}}">
+						<td><form action="/request_to_join_event" method="post" id="join_event_form_{{event_id}}">
 						<input type="hidden" name="event_id" value="{{ event_id }}"/>
-						</form>
-						<td><button type="submit" class="btn btn-default" form="join_event_form_{{event_id}}">Volunteer</button></td>
+						</form><button type="submit" class="btn btn-default" form="join_event_form_{{event_id}}">Volunteer</button></td>
 					  </tr>
 					  {{/events}}
 

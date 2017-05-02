@@ -34,14 +34,18 @@ router
 				      .where("events.status", ">", 0)
 				      .where("events.status", "<", 3)
 				      .then((volunteer_events) => {
-				      	// res.send(volunteer_events)
-				        res.render("index", {
-				        	zipcode: user[0].zipcode,
-				          events: events,
-				          owner_events: owner_events,
-				          volunteer_events: volunteer_events,
-                  user: user
-				        })
+				      	db("notifications")
+				      	.where("email", req.user.email)
+				      	.then((notifications) => {
+				      		res.render("index", {
+					        	zipcode: user[0].zipcode,
+					          	events: events,
+					          	owner_events: owner_events,
+					          	volunteer_events: volunteer_events,
+	                  			user: user,
+	                  			notifications: notifications
+					        })
+				      	})
 				      })
 			        })
 			      })
