@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+ <head>
 
   <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,28 +22,78 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <div>
-    <h1>{{event_name}}</h1>
-    <form action="/send_message" method="POST">
-      <div>
+    <div class="container-fluid community-nav">
+      <nav class="navbar navbar-default navbar-custom">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo"></a>
+        </div>
+        <div id="navbar2" class="navbar-collapse collapse">
+          <div>
+           <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>
+           </ul>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+           <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
+           <li><a class="logout-button" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          </ul>
+        </div> <!--/.nav-collapse -->
+      </nav>
+    </div><!--/.container-fluid -->
+    <div class="well">
+     <!-- <h1>Event Name: {{event_name}}</h1>
+      <h3>{{description}}</h3>
+      <h3>{{owner_email}}</h3>-->
+    </div>
+    <div>   
+     <form action="/send_message" method="POST">
+      <div class="form-group">
       <!--  <input type="text" name="message" placeholder="message" required/> -->
-         <textarea name="message" placeholder="message" rows="5" required></textarea>
+         <label for="comment">Message: </label>
+         <textarea class = "form-control" row ="10" id="comment" name = "message" required></textarea>
       </div>
       <div class="form-group">
 
         <input type="hidden" name="sendee_email" value="{{sendee_email}}"/>
-        <input type="hidden" name="event_id" value="{{event_id}}"/>
         
       </div>
       <div>
         <button type="submit" style="margin: 2pt;">Submit</button>
         <!--<input type="submit" value="Submit"/>-->
       </div>    
-    </form>
+     </form>
+      <div><!-- gets previous messages -->
+          <h4>Past Messages: </h4>
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Message</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--{{#messages}}-->
+            <tr>
+           <!-- <td>{{message}}</td>
+            <td>{{date_sent}</td>-->
+            <td>1</td>
+            <td>2</td>
+            </tr>
+           <!-- {{/messages}} -->
+
+          </tbody>
+          </table><!-- end of table -->
+      </div>
+    </div>
     </div>
   </body>
 </html>
-
-                    
-                 
-                   
