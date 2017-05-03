@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+  <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" media="screen" charset="utf-8" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/custom/style.css" media="screen" charset="utf-8" rel="stylesheet">
+
+
+    <title>Event</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container-fluid community-nav">
+      <nav class="navbar navbar-default navbar-custom">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo"></a>
+        </div>
+        <div id="navbar2" class="navbar-collapse collapse">
+          <div>
+           <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>
+           </ul>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+           <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
+           <li><a class="logout-button" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          </ul>
+        </div> <!--/.nav-collapse -->
+      </nav>
+    </div><!--/.container-fluid -->
+
+
+    <div class="container">
+    <div class="well">
+      <h1>Rate the volunteers for {{event_name}}</h1>
+    </div>
+
+      <div><!-- gets previous messages -->
+          <!-- <h4>Submit Rating: </h4> -->
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Volunteer</th>
+              <th>*Rating</th>
+              <th>Comment</th>
+              <th>Submit Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#volunteers}}
+            <tr>
+            <form action="/rate" method="POST">
+            <input type="hidden" name="owner_email" value="{{owner_email}}"/>
+            <input type="hidden" name="event_id" value="{{event_id}}"/>
+            <input type="hidden" name="participant_email" value="{{participant_email}}"/>
+           <td class = "col-xs-2 col-sm-2">{{first_name}} {{last_name}} {{participant_email}}</td>
+            <td class= "col-xs-2 col-sm-2">
+              <select id="rating" name="rating" title="rating">
+                <option>5</option> 
+                <option>4</option>
+                <option>3</option>
+                <option>2</option>
+                <option>1</option>
+              </select>
+            </td>
+            <td class= "col-xs-6 col-sm-6">
+              
+            <div class="form-group">
+               <!-- <label for="comment">Comments: </label> -->
+               <textarea class = "form-control" row ="10" id="comment" name = "comment"></textarea>
+            </div>  
+               
+            </td>
+            <td class= "col-xs-2 col-sm-2"><button type="submit">Submit Rating</button></td>
+            </form>
+            </tr>
+           {{/volunteers}}
+
+          </tbody>
+          </table><!-- end of table -->
+      </div>
+    </div>
+  </body>
+</html>
