@@ -19,6 +19,7 @@ var profile = require('./routes/profile');
 var events = require('./routes/events');
 var message = require('./routes/message');
 var notifications = require('./routes/notifications');
+var ratings = require('./routes/ratings');
 
 
 var app = express();
@@ -52,6 +53,7 @@ app.use('/', profile);
 app.use('/', events);
 app.use('/', message);
 app.use('/', notifications);
+app.use('/', ratings);
 app.get("/", (req, res, next) => {
     res.send({
       session: req.session,
