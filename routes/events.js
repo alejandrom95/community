@@ -170,7 +170,7 @@ router
         if(result === 0) {
           return res.send(400)
         }
-        var retDir = "/ratings/" + event_id;
+        var retDir = "/rating/" + event_id;
         res.redirect(retDir)
         // var d = new Date();
         // var month = d.getMonth()
