@@ -193,6 +193,7 @@
   						<th>Event</th>
   						<th>Date</th>
   						<th>Location</th>
+              <th>Messages</th>
   					  </tr>
   					</thead>
   					<tbody>
@@ -201,6 +202,14 @@
   						<td><a href="/event/{{event_id}}">{{event_name}}</a></td>
   						<td>{{date_time}}</td>
   						<td>{{location}}</td>
+              <td>
+                <form action="/message" method="post">
+                    <input type="hidden" name="sendee_email" value="{{ owner_email }}"/>
+                    <input type="hidden" name="event_id" value="{{ event_id }}"/>
+                    <button type="submit" class="btn">Messages</button>
+                  </div>
+                </form>
+              </td>
   					  </tr>
   					  	{{/volunteer_events}}
   					</tbody>
