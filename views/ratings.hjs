@@ -50,44 +50,52 @@
     </div><!--/.container-fluid -->
 
 
-
     <div class="container">
     <div class="well">
-      <h1>Event Name: {{event_name}}</h1>
+      <h1>Rate the volunteers for {{event_name}}</h1>
     </div>
-    <form action="/send_message" method="POST">
-      <div class="form-group">
-      <!--  <input type="text" name="message" placeholder="message" required/> -->
-         <label for="comment">Message: </label>
-         <textarea class = "form-control" row ="10" id="comment" name = "message" required></textarea>
-      </div>
-      <input type="hidden" name="sendee_email" value="{{sendee_email}}"/>
-        <input type="hidden" name="event_id" value="{{event_id}}"/>
-      <div>
-        <button type="submit" style="margin: 2pt;">Submit</button>
-        <!--<input type="submit" value="Submit"/>-->
-      </div>    
-     </form>
-
-    
 
       <div><!-- gets previous messages -->
-          <h4>Past Messages: </h4>
+          <!-- <h4>Submit Rating: </h4> -->
 
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>Message</th>
-              <th>Date</th>
+              <th>Volunteer</th>
+              <th>*Rating</th>
+              <th>Comment</th>
+              <th>Submit Rating</th>
             </tr>
           </thead>
           <tbody>
-            {{#messages}}
+            {{#volunteers}}
             <tr>
-           <td class = "col-xs-8 col-sm-10">{{message}}</td>
-            <td class= "col-xs-4 col-sm-2">{{date_sent}}</td>
+            <form action="/rate" method="POST">
+            <input type="hidden" name="owner_email" value="{{owner_email}}"/>
+            <input type="hidden" name="event_id" value="{{event_id}}"/>
+            <input type="hidden" name="participant_email" value="{{participant_email}}"/>
+           <td class = "col-xs-2 col-sm-2">{{first_name}} {{last_name}} {{participant_email}}</td>
+            <td class= "col-xs-2 col-sm-2">
+              <select id="rating" name="rating" title="rating">
+                <option>5</option> 
+                <option>4</option>
+                <option>3</option>
+                <option>2</option>
+                <option>1</option>
+              </select>
+            </td>
+            <td class= "col-xs-6 col-sm-6">
+              
+            <div class="form-group">
+               <!-- <label for="comment">Comments: </label> -->
+               <textarea class = "form-control" row ="10" id="comment" name = "comment"></textarea>
+            </div>  
+               
+            </td>
+            <td class= "col-xs-2 col-sm-2"><button type="submit">Submit Rating</button></td>
+            </form>
             </tr>
-           {{/messages}}
+           {{/volunteers}}
 
           </tbody>
           </table><!-- end of table -->
@@ -95,7 +103,3 @@
     </div>
   </body>
 </html>
-
-                    
-                 
-                   

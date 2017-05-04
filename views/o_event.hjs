@@ -23,157 +23,70 @@
   </head>
   <body>
     <div class="container-fluid community-nav">
-      <nav class="navbar navbar-default navbar-custom">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo">
-          </a>
-        </div>
-        <div id="navbar2" class="navbar-collapse collapse">
-        <div>
-         <ul class="nav navbar-nav">
-			  <li class="active"><a href="/">Home</a></li>
-			  <li><a href="#">Page 1</a></li>
-        <li><a href="#">Page 2</a></li>
-			</ul>
-		</div>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
-          <li><a class="logout-button" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-			</ul>
+          <nav class="navbar navbar-default">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo">
+              </a>
 
-        </div> <!--/.nav-collapse -->
-      </nav>
-    </div> <!--/.container-fluid -->
-
-
-<div class="container">
-
-<div class="container-fluid event-page">
-	<div class="row">
-    	<div class="col-md-7">
-    		<div class="eTitle">
-				<h1>{{event_name}}</h1>
-				<h2>Posted By: {{owner_email}}</h2>
-				<h3>Status: {{status}}</h3>
-				<div>
-					<form action="/open_event" method="post" style="float: left;">
-					  <div>
-					    <input type="hidden" name="event_id" value="{{event_id}}"/>
-					  </div>
-					  <div>
-					    <input type="hidden" name="status" value="1"/>
-					  </div>
-					  <div>
-					    <button type="submit" class="btn btn-join" style="margin: 2pt;">Open Event</button>
-					  </div>
-					</form>
-					<form action="/close_event" method="post" style="float: left;">
-					  <div>
-					    <input type="hidden" name="event_id" value="{{event_id}}"/>
-					  </div>
-					  <div>
-					    <input type="hidden" name="status" value="2"/>
-					  </div>
-					  <div>
-					    <button type="submit" class="btn btn-join"  style="margin: 2pt;">Close Event</button>
-					  </div>
-					</form>
-					<form action="/cancel_event" method="post"  style="float: left;">
-					  <div>
-					    <input type="hidden" name="event_id" value="{{event_id}}"/>
-					  </div>
-					  <div>
-					    <input type="hidden" name="status" value="3"/>
-					  </div>
-					  <div>
-					    <button type="submit" class="btn btn-join" style="margin: 2pt;">Cancel Event</button>
-					  </div>
-					</form>
-					<form action="/finish_event" method="post">
-					  <div>
-					    <input type="hidden" name="event_id" value="{{event_id}}"/>
-					  </div>
-					  <div>
-					    <input type="hidden" name="status" value="4"/>
-					  </div>
-					  <div>
-					    <button type="submit" class="btn btn-join" style="margin: 2pt;">Finish Event</button>
-					  </div>
-					</form>
-				</div>
-				
-				<!-- <br> -->
-				<p><br> {{description}} <br> <br></p>
-			</div> <!--/ eTitle -->
-			<div class="where">
-				<h1>Where & When</h1>
-				<p>
-					{{location}} {{zipcode}}
-					<br>On {{date_time}}
-				</p>
-			</div>  <!--/ where -->
-			</div>  <!--/ col-md-7 -->
-		
-			<div class="col-md-5"><img class="img-responsive center-block" src="/images/globe.png" alt="Globe"></div>
-    </div> <!--/ row -->
-</div> <!--/ container -->
-</div>
-<br>
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-8">
-              <form action="/modify_event" method="post">
-	    		<input type="hidden" name="event_id" value="{{ event_id }}"/>
-                <div class="form-group">
-                  <label for="city">Modify Event</label>
-                  <input type="text" name="event_name" class="form-control" placeholder="Event Title" value="{{event_name}}" required />
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" name="event_description" placeholder="Event Description" rows="5" required>{{description}}</textarea>
-                </div>
-                <div class="form-group">
-                  <label for="city">Event Location</label>
-                  <input type="text" name="event_location" class="form-control" placeholder="Full Address" id="city" value="{{location}}" required/>
-                  <input type="text" name="event_zipcode" class="form-control" placeholder="Zipcode" id="zipcode" value="{{zipcode}}" required/>
-                </div>
-                <div class="form-group">
-                  <label for="date_time">Event Date</label>
-                  <input type="text" name="event_date_time" class="form-control" placeholder="Date, Time" id="date_time" value="{{date_time}}" required/>
-                </div>
-                <div>
-                  <button type="submit" class="btn btn-primary">Modify Event</button>
-                </div>
+            </div>
+            <div id="navbar2" class="navbar-collapse collapse">
+            <div>
+        <ul class="nav navbar-nav">
+          <li class=""><a href="/"><span class="glyphicon glyphicon-th-large"></span>Dashboard</a></li>
+          <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span>Create Event</a></li>
+          <!-- <li><a href="#">Page 2</a></li> -->
+          <li>
+            <form class="form-inline" action="/search_event" method="post">
+              <div class="form-group">
+                <input type="text" id="search_keyword" name="search_keyword" class="form-control" aria-label="..." placeholder="Keyword">
+              </div>
+              <div class="input-group">
+                <input type="text" name="search_zipcode" id="search-zipcode" class="form-control" aria-label="..." placeholder="Zipcode">
+                <span class="input-group-btn">
+                  <button type="submit" id="search_button" class="btn btn-default">Search</button>
+                </span>
+              </div>
             </form>
-            </div>
-            <div class="col-md-4">
-              upload image....
-              <img class="img-responsive center-block" src="/images/globe.png" alt="Globe">
-            </div>
-          </div>
+          </li>
+        </ul>
         </div>
-      </div>
-    </div>
-    </div>
+
+        <ul class="nav navbar-nav navbar-right">
+          <!-- <li><input id="search-zipcode" type="text" class="form-control" aria-label="..." placeholder="ZIPCODE"></li>
+          <li><input id="search-keyword" type="text" class="form-control" aria-label="..." placeholder="KEYWORD"></li> -->
+
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+
+            </div> <!--/.nav-collapse -->
+          </nav>
+        </div> <!--/.container-fluid -->
 
 
-</div>
 <div class="container">
-	<div class="row">
-	    <!-- might have to change this to col-*-* -->
 
-		<div class ="col-sm-12" style = "background-color:white;">
-			<h4>Volunteers</h4>
+<div class="row">
+    <h1>Your Event: <small>{{event_name}}</small></h1><br>
+
+
+    <div class="col-md-3">
+      <div class="card">
+          <img class="card-img-top img-responsive" src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif">
+          <div class="card-block">
+              <h5 class="text-bold">Posted by: <a href="/profile/{{owner_email}}">{{owner_email}}</a></h5>
+          </div>
+      </div>
+
+    </div><!--./col-md-->
+
+    <div class="col-md-9">
+      <h3>Volunteers: </h3>
 
 			<table class="table table-hover">
 				<thead>
@@ -181,9 +94,9 @@
 					<th>Name</th>
 					<th>Email</th>
 					<th>Volunteer Status</th>
-					<th>Accept</th>
-					<th>Deny</th>
-					<th>Message</th>
+					<th></th>
+					<th></th>
+					<th></th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -197,18 +110,18 @@
 					<input type="hidden" name="event_id" value="{{ event_id }}"/>
 					<input type="hidden" name="participant_email" value="{{ participant_email }}"/>
 					</form>
-					<td><button type="submit" class="btn btn-default" form="accept_volunteer_form_{{participant_email}}">Accept</button></td>
+					<td><button type="submit" class="btn btn-primary" form="accept_volunteer_form_{{participant_email}}">Accept</button></td>
 
 					<form action="/deny_volunteer" method="post" id="deny_volunteer_form_{{participant_email}}">
 					<input type="hidden" name="event_id" value="{{ event_id }}"/>
 					<input type="hidden" name="participant_email" value="{{ participant_email }}"/>
 					</form>
-					<td><button type="submit" class="btn btn-default" form="deny_volunteer_form_{{participant_email}}">Deny</button></td>
+					<td><button type="submit" class="btn btn-warning" form="deny_volunteer_form_{{participant_email}}">Deny</button></td>
 					<form action="/message" method="post" id="message_volunteer_form_{{participant_email}}">
 		              <input type="hidden" name="sendee_email" value="{{ participant_email }}"/>
 		              <input type="hidden" name="event_id" value="{{ event_id }}"/>
 		          	</form>
-		          	<td><button type="submit" class="btn btn-default" form="message_volunteer_form_{{participant_email}}">Send Message</button></td>
+		          	<td><button type="submit" class="btn" form="message_volunteer_form_{{participant_email}}">Send Message</button></td>
 
 
 				  </tr>
@@ -216,16 +129,181 @@
 
 				</tbody>
 			  </table><!-- end of table -->
-		</div><!--end of span 12-->
-	</div><!-- end or row -->
-</div><!--end of container div-->
+        <div class="row">
+          <div class="col-md-6">
+            <h3>Description: </h3>
+              <p>{{description}}</p>
+              <hr>
+            <h3>Where & When</h3>
+      			<p>
+      				{{location}} {{zipcode}}
+      				<br>On {{date_time}}
+      			</p>
+            <br>
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-edit"></span> Edit Event</button>
+          </div>
+          <div class="col-md-6">
+            <h3 class="text-center"></h3>
+            <ul class="list-group text-center">
+              <li class="list-group-item">
+                <h3>Event Status: <span class="label label-default">{{status}}</span></h3>
+              </li>
+              <li class="list-group-item">
+                <form action="/open_event" method="post">
+      					  <div>
+      					    <input type="hidden" name="event_id" value="{{event_id}}"/>
+      					  </div>
+      					  <div>
+      					    <input type="hidden" name="status" value="1"/>
+      					  </div>
+      					  <div>
+      					    <button type="submit" class="btn btn-join btn-lg"><span class="glyphicon glyphicon-eye-open"></span> Open Event</button>
+      					  </div>
+      					</form>
+              </li>
+              <li class="list-group-item">
+                <form action="/close_event" method="post">
+      					  <div>
+      					    <input type="hidden" name="event_id" value="{{event_id}}"/>
+      					  </div>
+      					  <div>
+      					    <input type="hidden" name="status" value="2"/>
+      					  </div>
+      					  <div>
+      					    <button type="submit" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-eye-close"></span> Close Event</button>
+      					  </div>
+      					</form>
+              </li>
+              <li class="list-group-item">
+                <form action="/finish_event" method="post">
+      					  <div>
+      					    <input type="hidden" name="event_id" value="{{event_id}}"/>
+      					  </div>
+      					  <div>
+      					    <input type="hidden" name="status" value="4"/>
+      					  </div>
+      					  <div>
+      					    <button type="submit" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-ok"></span> Finish Event</button>
+      					  </div>
+      					</form>
+              </li>
+              <li class="list-group-item">
+                <form action="/cancel_event" method="post">
+      					  <div>
+      					    <input type="hidden" name="event_id" value="{{event_id}}"/>
+      					  </div>
+      					  <div>
+      					    <input type="hidden" name="status" value="3"/>
+      					  </div>
+      					  <div>
+      					    <button type="submit" class="btn btn-cancel btn-lg"><span class="glyphicon glyphicon-ban-circle"></span> Cancel Event</button>
+      					  </div>
+      					</form>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </div><!--/. col-md -->
+</div><!--/row-->
+
+
+<div class="row">
+    <div class="col-md-12">
+      <!-- <div class="container">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="item active">
+              <img src="https://coreldesigner.files.wordpress.com/2009/03/long-grass.jpg" style="width:100%;">
+            </div>
+
+            <div class="item">
+              <img src="https://previews.123rf.com/images/clivia/clivia0603/clivia060300047/350252-Long-grass-with-a-rainbow-Stock-Photo.jpg" style="width:100%;">
+            </div>
+
+            <div class="item">
+              <img src="http://wallpaperlayer.com/img/2015/9/tall-grass-wallpaper-583-657-hd-wallpapers.jpg" style="width:100%;">
+            </div>
+          </div>
+
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        </div> -->
+    </div><!--/span-->
+</div><!--/row-->
+<hr>
+
+</div><!--./container -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-8">
+            <form action="/modify_event" method="post">
+        <input type="hidden" name="event_id" value="{{ event_id }}"/>
+              <div class="form-group">
+                <label for="city">Modify Event</label>
+                <input type="text" name="event_name" class="form-control" placeholder="Event Title" value="{{event_name}}" required />
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="event_description" placeholder="Event Description" rows="5" required>{{description}}</textarea>
+              </div>
+              <div class="form-group">
+                <label for="city">Event Location</label>
+                <input type="text" name="event_location" class="form-control" placeholder="Full Address" id="city" value="{{location}}" required/>
+                <input type="text" name="event_zipcode" class="form-control" placeholder="Zipcode" id="zipcode" value="{{zipcode}}" required/>
+              </div>
+              <div class="form-group">
+                <label for="date_time">Event Date</label>
+                <input type="text" name="event_date_time" class="form-control" placeholder="Date, Time" id="date_time" value="{{date_time}}" required/>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary">Modify Event</button>
+              </div>
+          </form>
+          </div>
+          <div class="col-md-4">
+            upload image....
+            <img class="img-responsive center-block" src="/images/globe.png" alt="Globe">
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
 	<footer class="footer">
         <p>&copy; 2016 Company, Inc.</p>
       </footer>
 </div>
+<script src="/jquery/jquery.min.js" charset="utf-8"></script>
+<script src="/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
   </body>
 </html>
-
-
-
