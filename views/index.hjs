@@ -118,7 +118,7 @@
                     <span class="glyphicon glyphicon-star pull-right"></span></h4>
                   </div>
                   <h4>Inbox Messages <span class="badge pull-right">3</span></h4>
-                  <h4><a href="/profile">View your Profile</a></h4>
+                  <h4><a href="/profile/{{#user}}{{email}}{{/user}}">View your Profile</a></h4>
 
 
 

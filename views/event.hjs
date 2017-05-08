@@ -23,8 +23,13 @@
   </head>
   <body>
 
+<<<<<<< HEAD
 <div class="container-fluid community-nav">
       <nav class="navbar navbar-default navbar-custom">
+=======
+    <div class="container-fluid community-nav">
+      <nav class="navbar navbar-default">
+>>>>>>> master
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
             <span class="sr-only">Toggle navigation</span>
@@ -34,6 +39,7 @@
           </button>
           <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo">
           </a>
+<<<<<<< HEAD
         </div>
         <div id="navbar2" class="navbar-collapse collapse">
         <div>
@@ -47,6 +53,45 @@
           <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
           <li><a class="logout-button" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
+=======
+
+        </div>
+        <div id="navbar2" class="navbar-collapse collapse">
+        <div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Dashboard</a></li>
+      <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span>Create Event</a></li>
+      <!-- <li><a href="#">Page 2</a></li> -->
+      <li>
+        <form class="form-inline" action="/search_event" method="post">
+          <div class="form-group">
+            <input type="text" id="search_keyword" name="search_keyword" class="form-control" aria-label="..." placeholder="Keyword">
+          </div>
+          <div class="input-group">
+            <input type="text" name="search_zipcode" id="search-zipcode" class="form-control" aria-label="..." placeholder="Zipcode">
+            <span class="input-group-btn">
+              <button type="submit" id="search_button" class="btn btn-default">Search</button>
+            </span>
+          </div>
+        </form>
+      </li>
+    </ul>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      <!-- <li><input id="search-zipcode" type="text" class="form-control" aria-label="..." placeholder="ZIPCODE"></li>
+      <li><input id="search-keyword" type="text" class="form-control" aria-label="..." placeholder="KEYWORD"></li> -->
+
+      <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+
+        </div> <!--/.nav-collapse -->
+      </nav>
+    </div> <!--/.container-fluid -->
+
+
+
+>>>>>>> master
 
         </div> <!--/.nav-collapse -->
       </nav>
@@ -55,6 +100,7 @@
 
   	
 
+<<<<<<< HEAD
 <div class="container-fluid event-page">
 	<div class="row">
     	<div class="col-md-7">
@@ -67,6 +113,87 @@
           <form action="/request_to_join_event" method="post" style="float: left;">
             <div>
               <input type="hidden" name="event_id" value="{{ event_id }}"/>
+=======
+    <div class="col-md-3">
+      <div class="card">
+        <!-- src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif" -->
+          <img class="card-img-top img-responsive" src="{{image_name}}">
+          <div class="card-block">
+              <h5 class="text-bold">Posted by: <a href="/profile/{{owner_email}}">{{owner_email}}</a></h5>
+          </div>
+      </div>
+    </div><!--./col-md-->
+
+    <div class="col-md-4">
+      <h3>Description: </h3>
+        <p>{{description}}</p>
+        <hr>
+      <h3>Where & When</h3>
+			<p>
+				{{location}} {{zipcode}}
+				<br>On {{date_time}}
+			</p>
+    </div><!--/. col-md -->
+
+    <div class="col-md-5">
+      <h3 class="text-center"></h3>
+      <ul class="list-group text-center">
+          <li class="list-group-item">
+            <h3>Volunteer Status: <span class="label label-default">{{volunteer_status}}</span></h3>
+          </li>
+          <li class="list-group-item">
+            <form action="/request_to_join_event" method="post">
+              <div>
+                <input type="hidden" name="event_id" value="{{ event_id }}"/>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-join btn-lg"><span class="glyphicon glyphicon-plus-sign"></span> Request to Volunteer</button>
+              </div>
+            </form>
+          </li>
+          <li class="list-group-item">
+            <form action="/cancel_volunteer_request" method="post">
+              <div>
+                <input type="hidden" name="event_id" value="{{ event_id }}"/>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-cancel btn-lg"><span class="glyphicon glyphicon-remove-sign"></span> Cancel Request</button>
+              </div>
+            </form>
+          </li>
+          <li class="list-group-item">
+            <form action="/message" method="post">
+              <div>
+                <input type="hidden" name="sendee_email" value="{{ owner_email }}"/>
+              </div>
+              <div>
+                <input type="hidden" name="event_id" value="{{ event_id }}"/>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-comment"></span> Send Message</button>
+              </div>
+            </form>
+
+          </li>
+      </ul>
+    </div><!--/span-->
+</div><!--/row-->
+
+
+<div class="row">
+    <div class="col-md-12">
+      <!-- <div class="container">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+          </ol>
+
+          <div class="carousel-inner">
+            <div class="item active">
+              <img src="https://coreldesigner.files.wordpress.com/2009/03/long-grass.jpg" style="width:100%;">
+>>>>>>> master
             </div>
             <div>
               <button type="submit" class="btn btn-join"  style="margin: 2pt;">Volunteer</button>

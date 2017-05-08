@@ -34,8 +34,21 @@ router
       .insert(newEvent)
       .then((ids) => {
         // res.send(ids)
+        
+        if(req.body.event_image !== "") {
+          var newImage = {
+            event_id: ids[0],
+            image_name: req.body.event_image
+          };
+          db("images")
+            .insert(newImage)
+            .then((ids) => {
+              res.redirect("/")
+          }, next)
+        }
         res.redirect("/")
     }, next)
+    // res.send(req.body.event_image)
   })
   .post("/close_event", loginRequired, (req, res, next) => {
     const event_id = parseInt(req.body.event_id);
@@ -300,19 +313,28 @@ router
             else {
               volunteerStatus = "Not Volunteered";
             }
-
-
-            res.render("event", {
-              event_id: events[0].event_id,
-              event_name: events[0].event_name,
-              owner_email: events[0].owner_email,
-              description: events[0].description,
-              status: events[0].status,
-              location: events[0].location,
-              zipcode: events[0].zipcode,
-              date_time: events[0].date_time,
-              volunteer_status: volunteerStatus
+            db("images")
+            .where("event_id", event_id)
+            .then((images) => {
+              var imageName = "http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif";
+              if(images.length > 0) {
+                imageName = "/uploadedimages/" + images[images.length - 1].image_name;
+              }
+              res.render("event", {
+                event_id: events[0].event_id,
+                event_name: events[0].event_name,
+                owner_email: events[0].owner_email,
+                description: events[0].description,
+                status: events[0].status,
+                location: events[0].location,
+                zipcode: events[0].zipcode,
+                date_time: events[0].date_time,
+                volunteer_status: volunteerStatus,
+                image_name: imageName
+              })
             })
+
+            
           }
           else {
             res.redirect('/')
@@ -362,17 +384,25 @@ router
           else if(events[0].status === 4) {
             events[0].status = "Finished";
           }
-          res.render("o_event", {
-            volunteers: volunteers,
-            event_id: events[0].event_id,
-            event_name: events[0].event_name,
-            owner_email: events[0].owner_email,
-            description: events[0].description,
-            status: events[0].status,
-            location: events[0].location,
-            zipcode: events[0].zipcode,
-            date_time: events[0].date_time
-          })
+          db("images")
+            .where("event_id", event_id)
+            .then((images) => {
+              var imageName = "http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif";
+              if(images.length > 0) {
+                imageName = "/uploadedimages/" + images[images.length - 1].image_name;
+              }
+              res.render("o_event", {
+                volunteers: volunteers,
+                event_id: events[0].event_id,
+                event_name: events[0].event_name,
+                owner_email: events[0].owner_email,
+                description: events[0].description,
+                status: events[0].status,
+                location: events[0].location,
+                zipcode: events[0].zipcode,
+                image_name: imageName
+              })
+            })
         })
       })
     // res.render("event", {
@@ -695,7 +725,7 @@ router
         // res.send(eventsByKeyword)
         res.render("search_results", 
           {
-            events: eByKeyword
+            events: eventsByKeyword
           }
         )
       })
