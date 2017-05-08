@@ -103,7 +103,7 @@
 				  {{#volunteers}}
 				  <tr>
 					<td>{{first_name}} {{last_name}}</td>
-					<td>{{participant_email}}</td>
+					<td><a href="/profile/{{participant_email}}">{{participant_email}}</a></td>
 					<td>{{status}}</td>
 					<!-- <td>{{zipcode}}</td> -->
 					<form action="/accept_volunteer" method="post" id="accept_volunteer_form_{{participant_email}}">
