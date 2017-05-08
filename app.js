@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var multer = require('multer'); 
+var multer = require('multer');
 
 var session = require("express-session")
 var passport = require("passport")
@@ -52,31 +52,32 @@ var Storage = multer.diskStorage({
         // callback(null, file.originalname);
     }
 });
-var upload = multer({ storage: Storage, 
+var upload = multer({ storage: Storage,
   fileFilter: function (req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
         return cb(new Error('Only image files are allowed!'));
     }
     cb(null, true);
   }
-   }).array("imgUploader", 1); //Field name and max count 
-app.post("/api/Upload", function (req, res) { 
+   }).array("imgUploader", 1); //Field name and max count
+app.post("/api/Upload", function (req, res) {
     // var fn = req.files.filename
     // var on = req.files.originalname
     // console.log(req.files)
-    upload(req, res, function (err) { 
-        if (err) { 
-            return res.end("upload_error"); 
-        } 
-        return res.send(req.files[0].filename); 
-    }); 
-}); 
+    upload(req, res, function (err) {
+        if (err) {
+            return res.end("upload_error");
+        }
+        return res.send(req.files[0].filename);
+    });
+});
 
 app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 app.use('/jquery', express.static('node_modules/jquery/dist'));
 app.use('/custom', express.static('public/stylesheets'));
 app.use('/images', express.static('images'));
 app.use('/uploadedimages', express.static('uploadedimages'));
+app.use('/star', express.static('node_modules/kartik'));
 
 app.use('/', index);
 app.use('/', users);

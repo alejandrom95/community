@@ -23,31 +23,50 @@
   </head>
   <body>
     <div class="container-fluid community-nav">
-      <nav class="navbar navbar-default navbar-custom">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo"></a>
-        </div>
-        <div id="navbar2" class="navbar-collapse collapse">
-          <div>
-           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
-           </ul>
+        <nav class="navbar navbar-default">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar2">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="/images/community-logo.png" alt="Community Logo">
+            </a>
+
           </div>
-          <ul class="nav navbar-nav navbar-right">
-           <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span> Create</a></li>
-           <li><a class="logout-button" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-          </ul>
-        </div> <!--/.nav-collapse -->
-      </nav>
-    </div><!--/.container-fluid -->
+          <div id="navbar2" class="navbar-collapse collapse">
+          <div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Dashboard</a></li>
+        <li><a href="/create_event"><span class="glyphicon glyphicon-plus"></span>Create Event</a></li>
+        <!-- <li><a href="#">Page 2</a></li> -->
+        <li>
+          <form class="form-inline" action="/search_event" method="post">
+            <div class="form-group">
+              <input type="text" id="search_keyword" name="search_keyword" class="form-control" aria-label="..." placeholder="Keyword">
+            </div>
+            <div class="input-group">
+              <input type="text" name="search_zipcode" id="search-zipcode" class="form-control" aria-label="..." placeholder="Zipcode">
+              <span class="input-group-btn">
+                <button type="submit" id="search_button" class="btn btn-default">Search</button>
+              </span>
+            </div>
+          </form>
+        </li>
+      </ul>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li><input id="search-zipcode" type="text" class="form-control" aria-label="..." placeholder="ZIPCODE"></li>
+        <li><input id="search-keyword" type="text" class="form-control" aria-label="..." placeholder="KEYWORD"></li> -->
+
+        <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+
+          </div> <!--/.nav-collapse -->
+        </nav>
+      </div> <!--/.container-fluid -->
 
 
 
@@ -66,10 +85,10 @@
       <div>
         <button type="submit" style="margin: 2pt;">Submit</button>
         <!--<input type="submit" value="Submit"/>-->
-      </div>    
+      </div>
      </form>
 
-    
+
 
       <div><!-- gets previous messages -->
           <h4>Past Messages: </h4>
@@ -77,6 +96,7 @@
         <table class="table table-hover">
           <thead>
             <tr>
+              <th>Sent By</th>
               <th>Message</th>
               <th>Date</th>
             </tr>
@@ -84,8 +104,9 @@
           <tbody>
             {{#messages}}
             <tr>
-           <td class = "col-xs-8 col-sm-10">{{message}}</td>
-            <td class= "col-xs-4 col-sm-2">{{date_sent}}</td>
+            <td class = "col-sm-3">{{sender_email}}</td>
+           <td class = "col-sm-7">{{message}}</td>
+            <td class= "col-sm-2">{{date_sent}}</td>
             </tr>
            {{/messages}}
 
@@ -95,7 +116,3 @@
     </div>
   </body>
 </html>
-
-                    
-                 
-                   

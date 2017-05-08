@@ -39,7 +39,7 @@ router
               volunteersInfo.push(temp)
               ++count;
             }
-            
+
           }
           if(count > 0) {
             res.render("ratings", {
@@ -52,12 +52,12 @@ router
           else {
             res.redirect("/")
           }
-          
+
           // res.send(volunteersInfo)
           // res.send(volunteers)
         })
       }
-      //redirect to home page if user tries going to rating page but they 
+      //redirect to home page if user tries going to rating page but they
       //are not the owner of the event and/or the event isn't finished yet
       else {
         res.redirect("/")
@@ -82,8 +82,28 @@ router
     db("rating")
       .insert(newRating)
       .then((ids) => {
-        var retDir = "/ratings/" + event_id
-        res.redirect(retDir)
+        db("rating")
+        .where("ratee_email", participant_email)
+        .then((ratings) => {
+          var ratingsAvg = 0
+          for(var i = 0; i < ratings.length; i++) {
+            ratingsAvg += ratings[i].rating
+          }
+          ratingsAvg /= ratings.length
+          ratingsAvg = ratingsAvg.toFixed(2)
+          db("users")
+          .where("email", participant_email)
+          .update({rating: ratingsAvg})
+          .then((result) => {
+            if (result === 0) {
+              return res.send(400);
+            }
+            var retDir = "/ratings/" + event_id
+            res.redirect(retDir)
+          })
+          // res.send(ratingsAvg + "...")
+        })
+
       }, next)
     // res.send(notification_id)
     // db("events")
@@ -92,9 +112,9 @@ router
     //   var event = events_results[0];
     //   if(event.status === 4 && event.owner_email === req.user.email) {
     //     //get volunteers that are part of event and who were accepted as volunteers
-        
+
     //   }
-    //   //redirect to home page if user tries going to rating page but they 
+    //   //redirect to home page if user tries going to rating page but they
     //   //are not the owner of the event and/or the event isn't finished yet
     //   else {
     //     res.redirect("/")
@@ -122,7 +142,7 @@ router
   //         })
   //       })
   //     }
-  //     //redirect to home page if user tries going to rating page but they 
+  //     //redirect to home page if user tries going to rating page but they
   //     //are not the owner of the event and/or the event isn't finished yet
   //     else {
   //       res.redirect("/")
