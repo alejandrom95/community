@@ -19,12 +19,29 @@ function loginRequired(req, res, next) {
 }
 
 router
-  .get("/profile", loginRequired, (req, res, next) => {
+  .get("/profile/:owner_email", loginRequired, (req, res, next) => {
+    const profile_email = req.params.owner_email;
     db("users")
-      .where("email", req.user.email)
+      .where("email", profile_email)
       .then((users) => {
-        res.render("profile", {
-          users: users
+        db("rating")
+        .where("ratee_email", profile_email)
+        .then((ratings) => {
+          var ratingsAvg = 0
+          for(var i = 0; i < ratings.length; i++) {
+            ratingsAvg += ratings[i].rating
+          }
+          ratingsAvg /= ratings.length
+          ratingsAvg = ratingsAvg.toFixed(2)
+          res.render("profile", {
+            email: users[0].email,
+            first_name: users[0].first_name,
+            last_name: users[0].last_name,
+            zipcode: users[0].zipcode,
+            average_rating: ratingsAvg,
+            ratings: ratings
+          })
+          // res.send(ratingsAvg + "...")
         })
       })
   })
