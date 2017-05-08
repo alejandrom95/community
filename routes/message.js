@@ -22,12 +22,18 @@ router
       .orderBy("date_sent", "asc")
       .then((messages) => {
         // res.send(results)
-        res.render("message", 
-          {
-            sendee_email: req.body.sendee_email, 
-            event_id: event_id,
-            messages: messages
-          });
+        db("events")
+        .where("event_id", event_id)
+        .then((event) => {
+          var event_name = event[0].event_name;
+          res.render("message",
+            {
+              sendee_email: req.body.sendee_email,
+              event_id: event_id,
+              messages: messages,
+              event_name: event_name
+            });
+        })
       })
 	  // res.render("message", {sendee_email: req.body.sendee_email, event_id: event_id});
 	  //res.send(req.body.owner_email);
@@ -56,7 +62,7 @@ router
       message: req.body.message,
       date_sent: dateTime,
       read_status: 0,
-      event_id: event_id 
+      event_id: event_id
      };
      //insert into db
      db("messages")
@@ -76,17 +82,38 @@ router
           .insert(newNotification)
           .then(function(ids) {
             // var retDir = "/event/" + event_id;
-            res.redirect("/")
+            // res.redirect("/")
+            db("messages")
+              .where("event_id", event_id)
+              .where(function() {
+                this.where('sender_email', req.user.email).orWhere('sendee_email', req.user.email)
+              })
+              .orderBy("date_sent", "asc")
+              .then((messages) => {
+                // res.send(results)
+                db("events")
+                .where("event_id", event_id)
+                .then((event) => {
+                  var event_name = event[0].event_name;
+                  res.render("message",
+                    {
+                      sendee_email: req.body.sendee_email,
+                      event_id: event_id,
+                      messages: messages,
+                      event_name: event_name
+                    });
+                })
+              })
           }, next)
         })
-        
-        
+
+
 
 
 
      }, next)
 	})
-	
+
 
 
 
