@@ -16,6 +16,7 @@
     <!-- Custom styles for this template -->
     <link href="/custom/style.css" media="screen" charset="utf-8" rel="stylesheet">
 
+
   </head>
 
   <body>
@@ -70,17 +71,21 @@
                     </div>
                     <div class="form-group">
                       <label for="date_time">Event Date</label>
-                      <input type="text" name="event_date_time" class="form-control" placeholder="Date, Time" id="date_time" required/>
+                      <input type="text" name="event_date_time" class="form-control" placeholder="Date, Time" id="date_time" value="0000-00-00 00:00:00" required/>
                     </div>
                     <div>
-
+                    <input type="hidden" name="event_image" id="event_image"/>
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
                 </div>
                 <div class="col-md-4">
-                  upload image....
-                  <img class="img-responsive center-block" src="/images/globe.png" alt="Globe">
+                  <!-- upload image....
+                  <img class="img-responsive center-block" src="/images/globe.png" alt="Globe"> -->
+                  <form id="frmUploader" enctype="multipart/form-data" action="api/Upload/" method="post"> 
+                      <input id="upload-img" type="file" name="imgUploader" multiple /> 
+                      <input type="submit" name="submit" id="img-upload-button" value="Upload" style="display: none;" /> 
+                  </form> 
                 </div>
               </div>
             </div>
@@ -95,5 +100,44 @@
     </div> <!-- /container -->
     <script src="/jquery/jquery.min.js" charset="utf-8"></script>
     <script src="/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <script> 
+      $(function() {
+         $("#upload-img").change(function (){
+           $("#img-upload-button").click();
+         });
+      });
+        $(document).ready(function () { 
+            var options = { 
+                beforeSubmit: showRequest,  // pre-submit callback 
+                success: showResponse  // post-submit callback 
+            }; 
+  
+            // bind to the form's submit event 
+            $('#frmUploader').submit(function () { 
+                $(this).ajaxSubmit(options); 
+                // always return false to prevent standard browser submit and page navigation 
+                return false; 
+            }); 
+        }); 
+  
+        // pre-submit callback 
+        function showRequest(formData, jqForm, options) { 
+            // alert('Uploading is starting.'); 
+            return true; 
+        } 
+  
+        // post-submit callback 
+        function showResponse(responseText, statusText, xhr, $form) { 
+            // alert('status: ' + statusText + '\n\nresponseText: \n' + responseText ); 
+            // Do something where the response text is set as submit of image, modify for current event
+            if(responseText === "upload_error") {
+              alert('Error Uploading Image'); 
+            }
+            else {
+              $("#event_image").val(responseText);
+            }
+        } 
+    </script> 
   </body>
 </html>
