@@ -37,7 +37,7 @@ function register(req, email, password, done) {
         email: email,
         password: bcrypt.hashSync(password),
         zipcode: req.body.zipcode,
-        rating: 5.0,
+        rating: 0.0,
         public_profile: false
       };
 
